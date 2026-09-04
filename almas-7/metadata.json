@@ -1,0 +1,8 @@
+{
+  "name": "Almas 7",
+  "description": "الماس داشبورد - مدیریت هوشمند بوکمارک‌ها، ویجت‌های کاربردی، احراز هویت با ایمیل و دستیار شخصی",
+  "requestFramePermissions": [],
+  "majorCapabilities": [
+    "MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"
+  ]
+}

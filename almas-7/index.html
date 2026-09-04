@@ -1,0 +1,1889 @@
+<!doctype html>
+<html lang="fa" dir="rtl">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Almas 7 - الماس داشبورد</title>
+    <meta name="description" content="الماس داشبورد - مدیریت هوشمند بوکمارک‌ها، ویجت‌های کاربردی، احراز هویت با ایمیل و دستیار شخصی" />
+    <meta property="og:title" content="Almas 7 - الماس داشبورد" />
+    <meta property="og:description" content="الماس داشبورد - مدیریت هوشمند بوکمارک‌ها، ویجت‌های کاربردی، احراز هویت با ایمیل و دستیار شخصی" />
+    <meta property="og:type" content="website" />
+    <link rel="manifest" href="./manifest.json" />
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23818cf8' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M6 3h12l4 6-10 13L2 9Z'/%3E%3Cpath d='M11 3 8 9l4 13 4-13-3-6'/%3E%3Cpath d='M2 9h20'/%3E%3C/svg%3E" />
+    <link rel="icon" type="image/png" href="./icon.png" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="./style.css?v=3.0" />
+    <style id="page-nav-rail-critical-css">
+      #page-nav-rail,
+      nav.page-nav-rail {
+        position: fixed !important;
+        right: 10px !important;
+        left: auto !important;
+        top: 50% !important;
+        bottom: auto !important;
+        transform: translateY(-50%) !important;
+        z-index: 99999 !important;
+        display: flex !important;
+        flex-direction: column !important;
+        align-items: center !important;
+        gap: 0.35rem !important;
+        padding: 0.38rem 0.22rem !important;
+        border-radius: 9999px !important;
+        background: rgba(22, 28, 42, 0.82) !important;
+        backdrop-filter: blur(28px) saturate(200%) !important;
+        -webkit-backdrop-filter: blur(28px) saturate(200%) !important;
+        border: 1px solid rgba(255, 255, 255, 0.22) !important;
+        box-shadow: 0 12px 30px rgba(0, 0, 0, 0.45), 0 2px 8px rgba(0, 0, 0, 0.25), inset 0 1px 1px rgba(255, 255, 255, 0.35) !important;
+        width: 38px !important;
+        max-width: 38px !important;
+        height: auto !important;
+        box-sizing: border-box !important;
+        margin: 0 !important;
+      }
+      .nav-rail-btn {
+        position: relative !important;
+        width: 30px !important;
+        height: 30px !important;
+        min-width: 30px !important;
+        min-height: 30px !important;
+        max-width: 30px !important;
+        max-height: 30px !important;
+        border-radius: 50% !important;
+        border: none !important;
+        background: transparent !important;
+        color: rgba(255, 255, 255, 0.72) !important;
+        display: flex !important;
+        align-items: center !important;
+        justify-content: center !important;
+        cursor: pointer !important;
+        padding: 0 !important;
+        margin: 0 !important;
+        outline: none !important;
+        overflow: visible !important;
+        transition: all 0.25s cubic-bezier(0.2, 0.8, 0.2, 1) !important;
+      }
+      .nav-rail-btn.active {
+        background: linear-gradient(135deg, #6366f1 0%, #818cf8 100%) !important;
+        color: #ffffff !important;
+        box-shadow: 0 0 14px rgba(99, 102, 241, 0.7), 0 2px 8px rgba(0, 0, 0, 0.35) !important;
+      }
+      .nav-rail-tooltip {
+        position: absolute !important;
+        right: calc(100% + 10px) !important;
+        left: auto !important;
+        top: 50% !important;
+        transform: translateY(-50%) translateX(6px) !important;
+        background: rgba(15, 23, 42, 0.95) !important;
+        color: #ffffff !important;
+        font-family: 'Vazirmatn', -apple-system, sans-serif !important;
+        font-size: 0.72rem !important;
+        font-weight: 700 !important;
+        padding: 0.26rem 0.65rem !important;
+        border-radius: 9999px !important;
+        border: 1px solid rgba(255, 255, 255, 0.2) !important;
+        box-shadow: 0 8px 20px rgba(0, 0, 0, 0.5) !important;
+        white-space: nowrap !important;
+        pointer-events: none !important;
+        opacity: 0 !important;
+        visibility: hidden !important;
+        z-index: 100000 !important;
+        transition: opacity 0.22s ease, transform 0.22s ease, visibility 0.22s !important;
+      }
+      .nav-rail-btn:hover .nav-rail-tooltip {
+        opacity: 1 !important;
+        visibility: visible !important;
+        transform: translateY(-50%) translateX(0) !important;
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Dynamic Background & Overlay -->
+    <div id="wallpaper-layer"></div>
+    <div id="overlay-layer"></div>
+
+    <!-- Floating Vertical Capsule Navigation Rail (Right Edge) -->
+    <nav id="page-nav-rail" class="page-nav-rail glass-panel" aria-label="انتخاب صفحه داشبورد" style="position: fixed !important; right: 10px !important; left: auto !important; top: 50% !important; bottom: auto !important; transform: translateY(-50%) !important; z-index: 99999 !important; display: flex !important; flex-direction: column !important; align-items: center !important; gap: 0.35rem !important; padding: 0.38rem 0.22rem !important; border-radius: 9999px !important; width: 38px !important; box-sizing: border-box !important;">
+      <button type="button" class="nav-rail-btn active" id="nav-btn-page-1" data-page="1" aria-label="صفحه اول: بوکمارک‌ها و جستجو" style="position: relative !important; width: 30px !important; height: 30px !important; border-radius: 50% !important; display: flex !important; align-items: center !important; justify-content: center !important; padding: 0 !important; border: none !important; cursor: pointer !important;">
+        <span class="nav-rail-icon">
+          <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="nav-rail-svg">
+            <rect x="3" y="3" width="7" height="7" rx="2"></rect>
+            <rect x="14" y="3" width="7" height="7" rx="2"></rect>
+            <rect x="14" y="14" width="7" height="7" rx="2"></rect>
+            <rect x="3" y="14" width="7" height="7" rx="2"></rect>
+          </svg>
+        </span>
+        <span class="nav-rail-tooltip" role="tooltip" style="position: absolute !important; right: calc(100% + 10px) !important; top: 50% !important; transform: translateY(-50%) !important; opacity: 0 !important; visibility: hidden !important; pointer-events: none !important; white-space: nowrap !important;">بوکمارک‌ها و جستجو (کلید ۱)</span>
+      </button>
+      <button type="button" class="nav-rail-btn" id="nav-btn-page-2" data-page="2" aria-label="صفحه دوم: ابزارها و ویجت‌ها" style="position: relative !important; width: 30px !important; height: 30px !important; border-radius: 50% !important; display: flex !important; align-items: center !important; justify-content: center !important; padding: 0 !important; border: none !important; cursor: pointer !important;">
+        <span class="nav-rail-icon">
+          <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="nav-rail-svg">
+            <path d="m12 3-1.9 5.8a2 2 0 0 1-1.3 1.3L3 12l5.8 1.9a2 2 0 0 1 1.3 1.3L12 21l1.9-5.8a2 2 0 0 1 1.3-1.3L21 12l-5.8-1.9a2 2 0 0 1-1.3-1.3z"></path>
+          </svg>
+        </span>
+        <span class="nav-rail-tooltip" role="tooltip" style="position: absolute !important; right: calc(100% + 10px) !important; top: 50% !important; transform: translateY(-50%) !important; opacity: 0 !important; visibility: hidden !important; pointer-events: none !important; white-space: nowrap !important;">ابزارها و ویجت‌ها (کلید ۲)</span>
+      </button>
+    </nav>
+
+    <!-- Main Container -->
+    <main id="app-container">
+      <!-- 1. Top Bar: Standalone Diamond Brand (Right), Center Spacious Header (Greeting & Search), Standalone Actions (Left) -->
+      <div class="dashboard-top-bar" id="dashboard-top-bar">
+        <!-- Standalone Diamond Brand Logo (Outside Header) -->
+        <div class="header-brand-standalone glass-panel" id="header-brand-box" title="الماس داشبورد">
+          <div class="brand-diamond-icon-wrap">
+            <svg viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg" class="brand-diamond-svg">
+              <defs>
+                <linearGradient id="diamond-frame-grad" x1="0%" y1="0%" x2="100%" y2="100%">
+                  <stop offset="0%" stop-color="#ffffff" stop-opacity="0.95" />
+                  <stop offset="50%" stop-color="#e0e7ff" stop-opacity="0.88" />
+                  <stop offset="100%" stop-color="#c7d2fe" stop-opacity="0.95" />
+                </linearGradient>
+                <linearGradient id="diamond-back-grad" x1="0%" y1="0%" x2="100%" y2="100%">
+                  <stop offset="0%" stop-color="#ffffff" stop-opacity="0.45" />
+                  <stop offset="100%" stop-color="#a5b4fc" stop-opacity="0.25" />
+                </linearGradient>
+              </defs>
+
+              <!-- Back 3D depth facets -->
+              <g class="diamond-back-facets" stroke="url(#diamond-back-grad)" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                <line x1="34" y1="26" x2="57" y2="40" />
+                <line x1="66" y1="26" x2="43" y2="40" />
+                <line x1="43" y1="40" x2="50" y2="82" opacity="0.35" />
+                <line x1="57" y1="40" x2="50" y2="82" opacity="0.35" />
+              </g>
+
+              <!-- Outer diamond contour -->
+              <polygon points="34,26 66,26 82,40 50,82 18,40"
+                       class="diamond-outer-poly"
+                       stroke="url(#diamond-frame-grad)"
+                       stroke-width="3"
+                       stroke-linecap="round"
+                       stroke-linejoin="round"
+                       fill="rgba(255, 255, 255, 0.05)" />
+
+              <!-- Horizontal girdle line -->
+              <line x1="18" y1="40" x2="82" y2="40"
+                    class="diamond-girdle-line"
+                    stroke="url(#diamond-frame-grad)"
+                    stroke-width="2.8"
+                    stroke-linecap="round" />
+
+              <!-- Front crown facets -->
+              <line x1="34" y1="26" x2="43" y2="40"
+                    class="diamond-crown-facet"
+                    stroke="url(#diamond-frame-grad)"
+                    stroke-width="2.8"
+                    stroke-linecap="round" />
+              <line x1="66" y1="26" x2="57" y2="40"
+                    class="diamond-crown-facet"
+                    stroke="url(#diamond-frame-grad)"
+                    stroke-width="2.8"
+                    stroke-linecap="round" />
+
+              <!-- Front pavilion facet folds -->
+              <polyline points="43,40 37,54 50,82"
+                        class="diamond-pavilion-facet"
+                        stroke="url(#diamond-frame-grad)"
+                        stroke-width="2.8"
+                        stroke-linecap="round"
+                        stroke-linejoin="round" />
+              <polyline points="57,40 63,54 50,82"
+                        class="diamond-pavilion-facet"
+                        stroke="url(#diamond-frame-grad)"
+                        stroke-width="2.8"
+                        stroke-linecap="round"
+                        stroke-linejoin="round" />
+            </svg>
+          </div>
+          <span class="brand-name-title">الماس داشبورد</span>
+        </div>
+
+        <!-- Center Header Bar (Spacious Greeting, Clock, Date & Search) -->
+        <header class="header-bar glass-panel header-bar-spacious" id="main-header">
+          <div class="header-greeting-section">
+            <div class="greeting-box">
+              <div class="greeting-row-top">
+                <span id="greeting-text" class="greeting-title">درود</span>
+                <span id="greeting-icon" class="greeting-icon-svg" aria-hidden="true">
+                  <svg viewBox="0 0 24 24" width="17" height="17" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2"/><path d="M12 20v2"/><path d="m4.93 4.93 1.41 1.41"/><path d="m17.66 17.66 1.41 1.41"/><path d="M2 12h2"/><path d="M20 12h2"/><path d="m6.34 17.66-1.41 1.41"/><path d="m19.07 4.93-1.41 1.41"/></svg>
+                </span>
+                <span class="bookmark-counter-badge" id="total-bookmarks-count" title="تعداد کل بوکمارک‌ها">
+                  <svg viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="m19 21-7-4-7 4V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2v16z"/></svg>
+                  <span id="total-bookmarks-num">۰ بوکمارک</span>
+                </span>
+              </div>
+              <div class="date-badge">
+                <div class="date-persian-sub">
+                  <span class="capsule-icon-svg">
+                    <svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="18" height="18" x="3" y="4" rx="2" ry="2"/><line x1="16" x2="16" y1="2" y2="6"/><line x1="8" x2="8" y1="2" y2="6"/><line x1="3" x2="21" y1="10" y2="10"/></svg>
+                  </span>
+                  <span id="persian-date">--</span>
+                </div>
+                <span class="date-divider">•</span>
+                <div class="clock-inline" id="clock-container">
+                  <span class="capsule-icon-svg">
+                    <svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+                  </span>
+                  <span id="digital-clock" class="clock-digits-en">00:00:00</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="header-v-divider" aria-hidden="true"></div>
+
+          <!-- Centered Header Search Bar -->
+          <div class="header-search-wrap" id="search-section">
+            <div class="search-bar glass-panel" id="main-search-bar">
+              <!-- Engine Selector Wrapper -->
+              <div class="engine-select-container" id="search-engine-wrapper">
+                <button id="engine-btn" class="engine-btn" type="button" title="تغییر موتور جستجو">
+                  <span id="selected-engine-icon" class="engine-icon-wrap">
+                    <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+                  </span>
+                  <span id="selected-engine-name">گوگل</span>
+                  <span class="engine-arrow">
+                    <svg viewBox="0 0 24 24" width="10" height="10" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
+                  </span>
+                </button>
+                <div id="engine-dropdown" class="engine-dropdown">
+                  <div class="engine-dropdown-title">موتور جستجو:</div>
+                  <div id="engine-dropdown-list" class="engine-dropdown-list"></div>
+                </div>
+              </div>
+
+              <!-- Input -->
+              <input
+                type="text"
+                id="search-input"
+                class="search-input"
+                placeholder="جستجو در وب یا وارد کردن آدرس اینترنتی..."
+                autocomplete="off"
+              />
+
+              <!-- Submit Button -->
+              <button type="button" id="search-submit-btn" class="search-submit-btn" title="جستجو">
+                <svg viewBox="0 0 24 24" width="16" height="16" stroke="currentColor" stroke-width="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                  <circle cx="11" cy="11" r="8"></circle>
+                  <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+                </svg>
+              </button>
+            </div>
+
+            <!-- Search History Dropdown -->
+            <div id="search-history-dropdown" class="search-history-dropdown">
+              <div class="search-history-header">
+                <span>آخرین جستجوها</span>
+                <button type="button" id="btn-clear-all-history" class="btn-clear-history" title="پاک کردن کل تاریخچه">پاکسازی همه</button>
+              </div>
+              <div id="search-history-list" class="search-history-list"></div>
+            </div>
+          </div>
+        </header>
+
+        <!-- Standalone Actions: User Profile & Dashboard Settings (Outside Header) -->
+        <div class="header-actions-standalone glass-panel" id="header-actions-box">
+          <!-- Button shown when user is logged out -->
+          <button type="button" id="btn-header-login" class="header-auth-action-btn" title="ورود به حساب کاربری یا ایجاد حساب جدید">
+            <span>🔑</span>
+            <span>ورود / ثبت‌نام</span>
+          </button>
+
+          <!-- Chip shown when user is logged in -->
+          <div class="header-user-chip" id="header-user-chip" style="display: none;">
+            <button type="button" id="btn-header-profile" class="header-user-profile-trigger" title="مشاهده حساب کاربری و تنظیمات">
+              <div class="header-user-avatar" id="header-user-avatar">
+                <span id="header-user-letter">👤</span>
+                <img id="header-user-img" src="" alt="User" style="display: none;" />
+              </div>
+              <span class="header-user-name-text" id="header-user-displayname">کاربر</span>
+            </button>
+            <button type="button" id="btn-header-logout" class="header-quick-logout-btn" title="خروج سریع از حساب">
+              <span>🚪</span>
+            </button>
+          </div>
+
+          <button type="button" id="btn-open-settings" class="btn-icon header-settings-btn" title="تنظیمات داشبورد (کلید S)">
+            <span class="settings-gear-icon">
+              <svg viewBox="0 0 24 24" width="19" height="19" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12.22 2h-.44a2 2 0 0 0-2 2v.18a2 2 0 0 1-1 1.73l-.43.25a2 2 0 0 1-2 0l-.15-.08a2 2 0 0 0-2.73.73l-.22.38a2 2 0 0 0 .73 2.73l.15.1a2 2 0 0 1 1 1.72v.51a2 2 0 0 1-1 1.74l-.15.09a2 2 0 0 0-.73 2.73l.22.38a2 2 0 0 0 2.73.73l.15-.08a2 2 0 0 1 2 0l.43.25a2 2 0 0 1 1 1.73V20a2 2 0 0 0 2 2h.44a2 2 0 0 0 2-2v-.18a2 2 0 0 1 1-1.73l.43-.25a2 2 0 0 1 2 0l.15.08a2 2 0 0 0 2.73-.73l.22-.39a2 2 0 0 0-.73-2.73l-.15-.08a2 2 0 0 1-1-1.74v-.5a2 2 0 0 1 1-1.74l.15-.09a2 2 0 0 0 .73-2.73l-.22-.38a2 2 0 0 0-2.73-.73l-.15.08a2 2 0 0 1-2 0l-.43-.25a2 2 0 0 1-1-1.73V4a2 2 0 0 0-2-2z"/><circle cx="12" cy="12" r="3"/></svg>
+            </span>
+          </button>
+        </div>
+      </div>
+
+      <!-- Pages Viewport Container -->
+      <div id="dashboard-pages-wrapper" class="pages-wrapper">
+        <!-- ================= PAGE 1: BOOKMARKS & SEARCH ================= -->
+        <div id="page-bookmarks" class="dashboard-page active" data-page="1">
+          <!-- Folder Breadcrumb Navigation -->
+          <nav id="breadcrumb-container" class="breadcrumb-container"></nav>
+
+          <!-- Bookmark Grid -->
+          <section id="bookmark-grid" class="bookmark-grid"></section>
+        </div>
+
+        <!-- ================= PAGE 2: RICH SMART WIDGETS HUB ================= -->
+        <div id="page-widgets" class="dashboard-page" data-page="2">
+          <div class="widgets-header-bar glass-panel">
+            <div class="widgets-header-title">
+              <span class="widgets-header-icon">
+                <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="m12 3-1.9 5.8a2 2 0 0 1-1.3 1.3L3 12l5.8 1.9a2 2 0 0 1 1.3 1.3L12 21l1.9-5.8a2 2 0 0 1 1.3-1.3L21 12l-5.8-1.9a2 2 0 0 1-1.3-1.3z"></path>
+                </svg>
+              </span>
+              <div>
+                <h3>مرکز ابزارها و ویجت‌های کاربردی</h3>
+                <p>ساعت آنالوگ زنده، تقویم شمسی، یادداشت سریع، پلیر موزیک، پیش‌بینی هوا و اخبار روز</p>
+              </div>
+            </div>
+            <button type="button" id="btn-back-to-page1" class="btn-widget-back">
+              <span>← بازگشت به بوکمارک‌ها</span>
+            </button>
+          </div>
+
+          <!-- 5 Large Widgets Grid -->
+          <div class="widgets-grid">
+            <!-- 1. Large Analog Clock & Pomodoro Focus Widget -->
+            <div class="widget-card glass-panel" id="widget-analog-clock-card">
+              <div class="widget-card-header">
+                <div class="widget-card-title">
+                  <span class="widget-icon" id="clock-widget-icon">🕒</span>
+                  <span id="clock-widget-title-text">ساعت و پومودورو</span>
+                </div>
+                <div class="clock-mode-switcher">
+                  <button type="button" class="btn-mode-tab active" id="btn-tab-clock" title="ساعت آنالوگ">ساعت</button>
+                  <button type="button" class="btn-mode-tab" id="btn-tab-pomodoro" title="تایمر پومودورو">پومودورو</button>
+                </div>
+              </div>
+              
+              <!-- View 1: Live Analog Clock -->
+              <div class="analog-clock-body" id="clock-view-analog">
+                <div class="analog-clock-container">
+                  <svg id="analog-clock-svg" viewBox="0 0 240 240" class="analog-clock-svg">
+                    <!-- Dial background with liquid glass reflection -->
+                    <circle cx="120" cy="120" r="114" class="clock-face" />
+                    <circle cx="120" cy="120" r="108" class="clock-face-inner" />
+                    
+                    <!-- 60 ticks -->
+                    <g id="clock-ticks-group" class="clock-ticks"></g>
+
+                    <!-- 12 Dial Numbers -->
+                    <g id="clock-numbers-group" class="clock-numbers">
+                      <text x="120" y="42" text-anchor="middle" class="clock-num">۱۲</text>
+                      <text x="162" y="52" text-anchor="middle" class="clock-num">۱</text>
+                      <text x="192" y="82" text-anchor="middle" class="clock-num">۲</text>
+                      <text x="202" y="125" text-anchor="middle" class="clock-num">۳</text>
+                      <text x="192" y="166" text-anchor="middle" class="clock-num">۴</text>
+                      <text x="162" y="196" text-anchor="middle" class="clock-num">۵</text>
+                      <text x="120" y="206" text-anchor="middle" class="clock-num">۶</text>
+                      <text x="78" y="196" text-anchor="middle" class="clock-num">۷</text>
+                      <text x="48" y="166" text-anchor="middle" class="clock-num">۸</text>
+                      <text x="38" y="125" text-anchor="middle" class="clock-num">۹</text>
+                      <text x="48" y="82" text-anchor="middle" class="clock-num">۱۰</text>
+                      <text x="78" y="52" text-anchor="middle" class="clock-num">۱۱</text>
+                    </g>
+                    
+                    <!-- Sub-dial info -->
+                    <text x="120" y="86" text-anchor="middle" class="clock-sub-text">TEHRAN</text>
+                    <text x="120" y="156" text-anchor="middle" id="analog-clock-date-text" class="clock-date-text">--</text>
+
+                    <!-- Clock hands: Hour & Minute only -->
+                    <line id="analog-hour-hand" x1="120" y1="120" x2="120" y2="70" class="clock-hand hand-hour" />
+                    <line id="analog-minute-hand" x1="120" y1="120" x2="120" y2="48" class="clock-hand hand-minute" />
+                    
+                    <!-- Center axle pin with specular shine -->
+                    <circle cx="120" cy="120" r="6" class="clock-center-pin" />
+                    <circle cx="120" cy="120" r="2.5" class="clock-center-core" />
+                  </svg>
+                </div>
+                <div class="analog-clock-footer">
+                  <div class="analog-digital-time" id="analog-digital-time-val">00:00</div>
+                  <div class="analog-persian-weekday" id="analog-persian-weekday-val">در حال دریافت...</div>
+                </div>
+              </div>
+
+              <!-- View 2: Pomodoro Focus Timer -->
+              <div class="pomodoro-body" id="clock-view-pomodoro" style="display: none;">
+                <!-- Mode Strip -->
+                <div class="pomo-mode-strip">
+                  <button type="button" class="pomo-mode-btn active" data-mode="work">🎯 تمرکز (۲۵د)</button>
+                  <button type="button" class="pomo-mode-btn" data-mode="shortBreak">☕ استراحت (۵د)</button>
+                  <button type="button" class="pomo-mode-btn" data-mode="longBreak">🌴 استراحت طولانی (۱۵د)</button>
+                </div>
+
+                <!-- Circular Progress Ring & Center Content -->
+                <div class="pomo-dial-wrap">
+                  <svg class="pomo-ring-svg" viewBox="0 0 200 200">
+                    <circle cx="100" cy="100" r="84" class="pomo-ring-bg" />
+                    <circle id="pomo-ring-progress" cx="100" cy="100" r="84" class="pomo-ring-bar" />
+                  </svg>
+                  <div class="pomo-center-content">
+                    <div class="pomo-digits" id="pomo-timer-display">25:00</div>
+                    <div class="pomo-state-label" id="pomo-state-label">زمان تمرکز و بازدهی</div>
+                    <div class="pomo-cycles" id="pomo-cycles-dots" title="دورهای تکمیل شده">
+                      <span class="cycle-dot"></span>
+                      <span class="cycle-dot"></span>
+                      <span class="cycle-dot"></span>
+                      <span class="cycle-dot"></span>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Controls Row -->
+                <div class="pomo-controls-row">
+                  <button type="button" id="btn-pomo-toggle" class="btn-pomo-primary">
+                    <span id="pomo-toggle-icon">▶</span>
+                    <span id="pomo-toggle-text">شروع تمرکز</span>
+                  </button>
+                  <button type="button" id="btn-pomo-reset" class="btn-pomo-sub" title="ریست زمان">
+                    <span>🔄 ریست</span>
+                  </button>
+                  <button type="button" id="btn-pomo-sound-toggle" class="btn-pomo-sub active" title="هشدار صوتی">
+                    <span id="pomo-sound-icon">🔔</span>
+                  </button>
+                </div>
+              </div>
+            </div>
+
+            <!-- 2. Large Persian Calendar & Reminders Widget -->
+            <div class="widget-card glass-panel" id="widget-jalali-calendar-card">
+              <div class="widget-card-header">
+                <div class="widget-card-title">
+                  <span class="widget-icon">📅</span>
+                  <span>تقویم و یادآورهای شمسی</span>
+                </div>
+                <div class="calendar-controls">
+                  <button type="button" id="btn-cal-prev" class="btn-cal-nav" title="ماه قبل">›</button>
+                  <button type="button" id="btn-cal-today" class="btn-cal-today" title="رفتن به امروز">امروز</button>
+                  <button type="button" id="btn-cal-next" class="btn-cal-nav" title="ماه بعد">‹</button>
+                </div>
+              </div>
+              <div class="calendar-widget-body">
+                <div class="calendar-month-heading" id="calendar-month-heading-text">شهریور ۱۴۰۵</div>
+                <div class="calendar-weekdays-row">
+                  <span>ش</span>
+                  <span>ی</span>
+                  <span>د</span>
+                  <span>س</span>
+                  <span>چ</span>
+                  <span>پ</span>
+                  <span class="friday-col">ج</span>
+                </div>
+                <div class="calendar-days-grid" id="calendar-days-grid"></div>
+
+                <!-- Selected Day Tasks Bar & Quick Add -->
+                <div class="cal-tasks-container" id="cal-tasks-container">
+                  <div class="cal-tasks-header">
+                    <div class="cal-selected-info">
+                      <span class="cal-date-badge" id="calendar-selected-day-text">امروز در تقویم</span>
+                      <span class="cal-tasks-count" id="cal-selected-tasks-count">۰ یادآور</span>
+                    </div>
+                    <button type="button" class="btn-add-cal-task" id="btn-open-task-add" title="افزودن یادآور برای این روز">
+                      <span>➕ یادآور جدید</span>
+                    </button>
+                  </div>
+                  
+                  <!-- Task List for Selected Date -->
+                  <div class="cal-tasks-list" id="cal-tasks-list">
+                    <div class="cal-empty-tasks">هیچ یادآوری برای این تاریخ ثبت نشده است. روی ➕ کلیک کنید.</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- 3. Clean Multi-Notes Overview Widget -->
+            <div class="widget-card glass-panel" id="widget-notes-card">
+              <div class="widget-card-header">
+                <div class="widget-card-title">
+                  <span class="widget-icon">📝</span>
+                  <span>دفترچه یادداشت‌ها</span>
+                  <span class="notes-count-badge" id="notes-total-count-badge">۱ یادداشت</span>
+                </div>
+                <div class="notes-header-actions">
+                  <button type="button" id="btn-open-new-note-modal" class="btn-new-note-prominent" title="ایجاد یادداشت جدید">
+                    <span>➕</span>
+                    <span>یادداشت جدید</span>
+                  </button>
+                </div>
+              </div>
+
+              <!-- Search Bar for Notes -->
+              <div class="notes-search-bar-wrap">
+                <span class="notes-search-icon">🔍</span>
+                <input type="text" id="notes-search-input" class="notes-search-input" placeholder="جستجو در متن و عنوان یادداشت‌ها..." />
+              </div>
+
+              <!-- Clean Cards Container -->
+              <div class="notes-widget-body">
+                <div class="notes-cards-container" id="notes-cards-container">
+                  <!-- Dynamically populated clean summary cards -->
+                </div>
+              </div>
+            </div>
+
+            <!-- 4. Large Music & Ambient Player Widget -->
+            <div class="widget-card glass-panel" id="widget-music-card">
+              <div class="widget-card-header">
+                <div class="widget-card-title">
+                  <span class="widget-icon">🎵</span>
+                  <span>موزیک‌پلیر آرامش و تمرکز</span>
+                </div>
+                <div class="music-live-indicator" id="music-live-status">
+                  <span class="status-dot"></span>
+                  <span id="music-status-text">آماده پخش</span>
+                </div>
+              </div>
+              <div class="music-widget-body">
+                <!-- Track info & visualizer banner -->
+                <div class="music-artwork-banner">
+                  <div class="music-disc" id="music-disc-elem">
+                    <span class="music-disc-inner">🎧</span>
+                  </div>
+                  <div class="music-track-meta">
+                    <div class="music-track-title" id="music-track-title">Lofi Chill & Cozy Rain</div>
+                    <div class="music-track-artist" id="music-track-artist">موسیقی آرامش‌بخش و تمرکز ذهن</div>
+                    <!-- Audio animated visualizer bars -->
+                    <div class="music-visualizer" id="music-visualizer">
+                      <span class="v-bar"></span>
+                      <span class="v-bar"></span>
+                      <span class="v-bar"></span>
+                      <span class="v-bar"></span>
+                      <span class="v-bar"></span>
+                      <span class="v-bar"></span>
+                      <span class="v-bar"></span>
+                      <span class="v-bar"></span>
+                      <span class="v-bar"></span>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Playlist Selector Pills -->
+                <div class="music-stations-strip" id="music-stations-strip">
+                  <button type="button" class="station-btn active" data-track="0">لوفای بارانی</button>
+                  <button type="button" class="station-btn" data-track="1">سینت‌ویو غروب</button>
+                  <button type="button" class="station-btn" data-track="2">پیانو و طبیعت</button>
+                  <button type="button" class="station-btn" data-track="3">امبینت ژرف</button>
+                </div>
+
+                <!-- Timeline / Progress Bar -->
+                <div class="music-progress-wrap">
+                  <span class="music-time-label" id="music-time-current">0:00</span>
+                  <div class="music-seek-bar-track" id="music-seek-track">
+                    <div class="music-seek-progress" id="music-seek-progress"></div>
+                  </div>
+                  <span class="music-time-label" id="music-time-duration">3:30</span>
+                </div>
+
+                <!-- Player Controls -->
+                <div class="music-controls-row">
+                  <div class="music-volume-box">
+                    <span id="music-vol-icon" class="music-vol-icon">🔊</span>
+                    <input type="range" id="music-vol-slider" min="0" max="100" value="70" class="music-vol-slider" />
+                  </div>
+                  <div class="music-main-buttons">
+                    <button type="button" id="btn-music-prev" class="btn-player-sub" title="ترک قبلی">⏮</button>
+                    <button type="button" id="btn-music-play" class="btn-player-play" title="پخش / توقف">
+                      <span id="music-play-icon">▶</span>
+                    </button>
+                    <button type="button" id="btn-music-next" class="btn-player-sub" title="ترک بعدی">⏭</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- 5. Large Weather Forecast Widget -->
+            <div class="widget-card glass-panel" id="widget-weather-card">
+              <div class="widget-card-header">
+                <div class="widget-card-title">
+                  <span class="widget-icon">🌤️</span>
+                  <span>وضعیت و پیش‌بینی آب و هوا</span>
+                </div>
+                <select id="weather-city-select" class="weather-city-select" title="انتخاب شهر">
+                  <option value="tehran" selected>تهران</option>
+                  <option value="mashhad">مشهد</option>
+                  <option value="isfahan">اصفهان</option>
+                  <option value="shiraz">شیراز</option>
+                  <option value="tabriz">تبریز</option>
+                  <option value="rasht">رشت</option>
+                  <option value="karaj">کرج</option>
+                  <option value="ahvaz">اهواز</option>
+                  <option value="yazd">یزد</option>
+                  <option value="dubai">دبی</option>
+                  <option value="istanbul">استانبول</option>
+                </select>
+              </div>
+              <div class="weather-widget-body">
+                <div class="weather-current-hero">
+                  <div class="weather-hero-temp">
+                    <span class="weather-big-temp" id="weather-big-temp">۲۴°</span>
+                    <div class="weather-hero-desc">
+                      <div class="weather-condition-text" id="weather-condition-text">صاف و آفتابی</div>
+                      <div class="weather-feels-like" id="weather-feels-like">دمای حسی: ۲۶° • بیشینه/کمینه: ۲۸° / ۱۸°</div>
+                    </div>
+                  </div>
+                  <div class="weather-hero-icon-wrap" id="weather-hero-icon-wrap">
+                    <span class="weather-hero-icon" id="weather-hero-icon">☀️</span>
+                  </div>
+                </div>
+
+                <!-- 4 Metrics Bar -->
+                <div class="weather-metrics-grid">
+                  <div class="weather-metric-box">
+                    <span class="w-metric-icon">💧</span>
+                    <div class="w-metric-val" id="weather-humidity">۳۲٪</div>
+                    <div class="w-metric-name">رطوبت هوا</div>
+                  </div>
+                  <div class="weather-metric-box">
+                    <span class="w-metric-icon">💨</span>
+                    <div class="w-metric-val" id="weather-wind">۱۴ km/h</div>
+                    <div class="w-metric-name">سرعت باد</div>
+                  </div>
+                  <div class="weather-metric-box">
+                    <span class="w-metric-icon">☀️</span>
+                    <div class="w-metric-val" id="weather-uv">۴ (متوسط)</div>
+                    <div class="w-metric-name">شاخص UV</div>
+                  </div>
+                  <div class="weather-metric-box">
+                    <span class="w-metric-icon">🍃</span>
+                    <div class="w-metric-val" id="weather-aqi">۴۸ (سالم)</div>
+                    <div class="w-metric-name">کیفیت هوا</div>
+                  </div>
+                </div>
+
+                <!-- 4-Day Forecast -->
+                <div class="weather-forecast-row" id="weather-forecast-row"></div>
+              </div>
+            </div>
+
+            <!-- 6. Daily News & Pulse Card -->
+            <div class="widget-card glass-panel news-widget-card" id="widget-news-card">
+              <div class="widget-card-header news-card-header">
+                <div class="widget-card-title">
+                  <span class="widget-icon">📰</span>
+                  <span>اخبار روز</span>
+                </div>
+                <!-- Minimalist Category Filter Pills & Refresh Button -->
+                <div class="news-header-actions">
+                  <div class="news-filter-pills" id="news-filter-pills">
+                    <button type="button" class="news-pill active" data-category="general" title="اخبار داغ و عمومی">عمومی</button>
+                    <button type="button" class="news-pill" data-category="tech" title="فناوری و هوش مصنوعی">تکنولوژی</button>
+                    <button type="button" class="news-pill" data-category="economy" title="اقتصاد، طلا و بازار">بازار</button>
+                  </div>
+                  <button type="button" id="btn-news-refresh" class="btn-news-icon-refresh" title="بروزرسانی زنده اخبار">
+                    <span id="news-refresh-spin" class="refresh-spin-icon">🔄</span>
+                  </button>
+                </div>
+              </div>
+
+              <!-- News Body (Featured story + Secondary Stream) -->
+              <div class="news-widget-body" id="news-widget-body">
+                <!-- Featured News Card (Top Story) -->
+                <div class="news-featured-card" id="news-featured-card">
+                  <div class="news-featured-img-wrap">
+                    <img id="news-featured-img" src="https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&w=600&q=80" alt="خبر برگزیده" loading="lazy" />
+                    <span class="news-featured-badge" id="news-featured-badge">خبر ویژه</span>
+                  </div>
+                  <div class="news-featured-content">
+                    <h4 class="news-featured-title" id="news-featured-title">در حال دریافت تازه‌ترین خبرهای روز...</h4>
+                    <div class="news-featured-footer">
+                      <div class="news-meta-info">
+                        <span class="news-source-tag" id="news-featured-source">خبرگزاری</span>
+                        <span class="news-time-dot">•</span>
+                        <span class="news-time-tag" id="news-featured-time">چند دقیقه پیش</span>
+                      </div>
+                      <a href="#" target="_blank" rel="noopener noreferrer" class="btn-news-read-more" id="news-featured-link">
+                        <span>مشاهده کامل</span>
+                        <span class="read-more-arrow">←</span>
+                      </a>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Secondary News Stream (3-4 concise horizontal items) -->
+                <div class="news-secondary-stream" id="news-secondary-stream">
+                  <!-- Dynamically populated via JS -->
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+
+    <!-- Modal: Add Bookmark / Folder -->
+    <div id="add-modal" class="modal-overlay">
+      <div class="modal-dialog glass-panel">
+        <div class="modal-header">
+          <h3>
+            <span class="modal-header-icon">+</span>
+            <span>افزودن بوکمارک یا پوشه جدید</span>
+          </h3>
+          <button class="btn-icon" data-close-modal>✕</button>
+        </div>
+        <form id="add-form">
+          <div class="modal-body">
+            <!-- Type Selector -->
+            <div class="segmented-control">
+              <button type="button" id="seg-add-site" class="segment-btn active">🌐 بوکمارک (سایت)</button>
+              <button type="button" id="seg-add-folder" class="segment-btn">📁 پوشه دسته‌بندی</button>
+            </div>
+
+            <!-- Title Input -->
+            <div class="form-group">
+              <label class="form-label" for="add-title">عنوان یا نام:</label>
+              <input type="text" id="add-title" class="form-input" placeholder="مثلاً: دیجی‌کالا یا گیت‌هاب" required />
+            </div>
+
+            <!-- URL Input -->
+            <div class="form-group" id="add-url-group">
+              <label class="form-label" for="add-url">آدرس اینترنتی (URL):</label>
+              <input type="text" id="add-url" class="form-input form-input-ltr" placeholder="https://example.com" />
+            </div>
+
+            <!-- Parent Folder Select -->
+            <div class="form-group">
+              <label class="form-label" for="add-folder-select">قرارگیری در پوشه:</label>
+              <select id="add-folder-select" class="form-input"></select>
+            </div>
+
+            <!-- Quick Emoji Picker -->
+            <div class="form-group">
+              <label class="form-label">انتخاب آیکون ایموجی دلخواه (اختیاری):</label>
+              <div id="add-emoji-picker" class="emoji-picker-grid"></div>
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn-breadcrumb-back" data-close-modal>انصراف</button>
+            <button type="submit" class="btn-accent">ذخیره در داشبورد</button>
+          </div>
+        </form>
+      </div>
+    </div>
+
+    <!-- Modal: Edit Bookmark -->
+    <div id="edit-modal" class="modal-overlay">
+      <div class="modal-dialog glass-panel">
+        <div class="modal-header">
+          <h3>
+            <span class="modal-header-icon">✏️</span>
+            <span>ویرایش مشخصات بوکمارک / پوشه</span>
+          </h3>
+          <button class="btn-icon" data-close-modal>✕</button>
+        </div>
+        <form id="edit-form">
+          <div class="modal-body">
+            <div class="form-group">
+              <label class="form-label" for="edit-title">عنوان:</label>
+              <input type="text" id="edit-title" class="form-input" required />
+            </div>
+
+            <div class="form-group" id="edit-url-group">
+              <label class="form-label" for="edit-url">آدرس URL:</label>
+              <input type="text" id="edit-url" class="form-input form-input-ltr" />
+            </div>
+
+            <div class="form-group">
+              <label class="form-label" for="edit-icon-url">آدرس آیکون اختصاصی (تصویر PNG/SVG):</label>
+              <input type="text" id="edit-icon-url" class="form-input form-input-ltr" placeholder="https://site.com/icon.png" />
+            </div>
+
+            <div class="form-group">
+              <label class="form-label">ایموجی سفارشی:</label>
+              <div id="edit-emoji-picker" class="emoji-picker-grid"></div>
+            </div>
+
+            <!-- 🔐 بخش رمز عبور ۴ رقمی (PIN Code) -->
+            <div class="form-group" style="margin-top: 0.75rem; background: rgba(255, 255, 255, 0.04); border: 1px solid rgba(255, 255, 255, 0.1); border-radius: 14px; padding: 0.85rem;">
+              <div class="settings-row-between" style="margin-bottom: 0.5rem;">
+                <div class="settings-row-info">
+                  <span class="settings-row-icon">🔐</span>
+                  <div>
+                    <div class="settings-row-title" style="font-size: 0.86rem; font-weight: 700;">رمز عبور ۴ رقمی (PIN Code)</div>
+                    <div class="settings-row-desc" style="font-size: 0.73rem; color: var(--text-secondary);">
+                      قفل‌گذاری امنیتی روی این بوکمارک یا پوشه
+                    </div>
+                  </div>
+                </div>
+                <label class="toggle-switch" title="فعال‌سازی رمز عبور">
+                  <input type="checkbox" id="toggle-edit-lock" />
+                  <span class="toggle-slider"></span>
+                </label>
+              </div>
+
+              <div id="edit-pin-container" style="display: none; margin-top: 0.6rem; padding-top: 0.5rem; border-top: 1px solid rgba(255, 255, 255, 0.06);">
+                <label class="form-label" for="edit-pin-input" style="font-size: 0.76rem;">تنظیم رمز عبور ۴ رقمی (فقط اعداد):</label>
+                <div style="display: flex; gap: 0.5rem; align-items: center;">
+                  <input
+                    type="password"
+                    id="edit-pin-input"
+                    class="form-input form-input-ltr"
+                    maxlength="4"
+                    pattern="[0-9]{4}"
+                    inputmode="numeric"
+                    placeholder="••••"
+                    style="letter-spacing: 0.4rem; font-weight: 800; text-align: center; font-size: 1.2rem; width: 140px;"
+                  />
+                  <button type="button" id="btn-toggle-pin-visibility" class="btn-breadcrumb-back" style="padding: 0.5rem 0.75rem;" title="نمایش/مخفی‌سازی رمز">
+                    👁️
+                  </button>
+                </div>
+              </div>
+
+              <!-- متن هشدار قرمز (Red Warning) -->
+              <div class="lock-warning-text" style="color: #ef4444; font-size: 0.74rem; font-weight: 600; line-height: 1.55; margin-top: 0.65rem; display: flex; align-items: flex-start; gap: 0.35rem; background: rgba(239, 68, 68, 0.08); padding: 0.5rem 0.65rem; border-radius: 8px; border: 1px solid rgba(239, 68, 68, 0.2);">
+                <span style="font-size: 0.9rem; flex-shrink: 0;">⚠️</span>
+                <span>هشدار: در صورت فراموشی رمز عبور، امکان بازیابی آن وجود ندارد و برای دسترسی مجدد باید این بوکمارک/پوشه را حذف کرده و از اول بسازید.</span>
+              </div>
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn-breadcrumb-back" data-close-modal>انصراف</button>
+            <button type="submit" class="btn-accent">ذخیره تغییرات</button>
+          </div>
+        </form>
+      </div>
+    </div>
+
+    <!-- Modal: Settings -->
+    <div id="settings-modal" class="modal-overlay">
+      <div class="modal-dialog modal-dialog-large glass-panel">
+        <div class="modal-header">
+          <h3>
+            <span class="modal-header-icon">⚙️</span>
+            <span>تنظیمات و شخصی‌سازی داشبورد</span>
+          </h3>
+          <button class="btn-icon" data-close-modal>✕</button>
+        </div>
+        <div class="modal-body">
+          <!-- Settings Navigation Tabs -->
+          <div class="segmented-control settings-tabs-nav">
+            <button type="button" class="segment-btn settings-tab-btn active" data-tab="account">👤 حساب کاربری</button>
+            <button type="button" class="segment-btn settings-tab-btn" data-tab="theme">🎨 ظاهر و تم</button>
+            <button type="button" class="segment-btn settings-tab-btn" data-tab="wallpaper">🖼️ پس‌زمینه</button>
+            <button type="button" class="segment-btn settings-tab-btn" data-tab="backup">💾 پشتیبان‌گیری</button>
+          </div>
+
+          <!-- 🧩 ۲. بخش حساب کاربری (Account Management Section) -->
+          <div id="tab-content-account" class="settings-tab-panel active">
+            <!-- 🎨 هدر اختصاصی پروفایل فقط در تب حساب کاربری (Account Profile Card) -->
+            <div class="settings-profile-card glass-panel" id="settings-profile-header" style="display: none;">
+              <div class="profile-avatar-wrapper">
+                <div class="profile-avatar" id="profile-avatar-display">
+                  <span id="profile-avatar-letter">👤</span>
+                  <img id="profile-avatar-img" src="" alt="آواتار کاربر" style="display: none;" />
+                </div>
+                <label class="profile-avatar-edit-btn" title="تغییر تصویر آواتار">
+                  <span>📷</span>
+                  <input type="file" id="input-profile-avatar" accept="image/*" style="display: none;" />
+                </label>
+              </div>
+              <div class="profile-info">
+                <div class="profile-name-row">
+                  <h3 class="profile-display-name" id="profile-display-name-text">کاربر داشبورد</h3>
+                  <span class="profile-verified-badge" id="profile-verified-badge" style="display: none;" title="حساب و ایمیل تایید شده">
+                    <svg viewBox="0 0 24 24" width="13" height="13" fill="currentColor"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/></svg>
+                    <span>ایمیل تأیید شده</span>
+                  </span>
+                  <span class="profile-unverified-badge" id="profile-unverified-badge" style="display: none;" title="ایمیل هنوز تأیید نشده است">
+                    <span>⚠️ ایمیل تأیید نشده</span>
+                  </span>
+                </div>
+                <div class="profile-meta-row">
+                  <span class="profile-username" id="profile-username-text">@username</span>
+                  <span class="profile-meta-divider">•</span>
+                  <span class="profile-email" id="profile-email-text">ایمیل ثبت نشده</span>
+                </div>
+              </div>
+              <div style="display: flex; gap: 0.4rem; align-items: center;">
+                <button type="button" class="btn-quick-edit-profile" id="btn-quick-edit-profile" title="ویرایش مشخصات">
+                  <span>✏️</span>
+                  <span>ویرایش</span>
+                </button>
+                <button type="button" class="btn-quick-edit-profile" id="btn-quick-logout-profile" title="خروج از حساب" style="color: #fbbf24; border-color: rgba(251, 191, 36, 0.3);">
+                  <span>🚪</span>
+                  <span>خروج</span>
+                </button>
+              </div>
+            </div>
+
+            <!-- نوار وضعیت تأیید ایمیل در تب حساب کاربری (Email Verification Banner) -->
+            <div class="auth-unverified-banner" id="account-unverified-banner" style="display: none;">
+              <div class="unverified-banner-info">
+                <span class="unverified-banner-icon">⚠️</span>
+                <div class="unverified-banner-text-col">
+                  <strong class="unverified-banner-title">ایمیل شما هنوز تأیید نشده است!</strong>
+                  <span class="unverified-banner-desc">برای دسترسی نامحدود و ارتقای امنیت حساب، لطفاً صندوق ایمیل خود را بررسی و روی لینک تأیید کلیک نمایید.</span>
+                </div>
+              </div>
+              <div class="unverified-banner-btn-row">
+                <button type="button" id="btn-banner-resend-verification" class="btn-resend-email-action">
+                  <span>📨</span>
+                  <span id="banner-resend-text">ارسال مجدد ایمیل تأیید</span>
+                </button>
+                <button type="button" id="btn-banner-refresh-verification" class="btn-refresh-email-action" title="بررسی مجدد وضعیت تأییدیه ایمیل">
+                  <span>🔄</span>
+                  <span>بررسی وضعیت تأیید</span>
+                </button>
+              </div>
+            </div>
+
+            <!-- زبانه تغییر وضعیت احراز هویت (ورود / ایجاد حساب جدید) -->
+            <div class="auth-mode-switcher" id="auth-mode-switcher">
+              <button type="button" class="auth-mode-btn active" id="btn-auth-mode-login" data-auth-mode="login">
+                <span>🔑</span>
+                <span>ورود به حساب</span>
+              </button>
+              <button type="button" class="auth-mode-btn" id="btn-auth-mode-register" data-auth-mode="register">
+                <span>✨</span>
+                <span>ایجاد حساب جدید</span>
+              </button>
+            </div>
+
+            <!-- پنل ۱: فرم ورود (Login Panel) -->
+            <div id="auth-login-panel" class="auth-panel">
+              <div class="settings-box">
+                <div class="settings-box-heading-row">
+                  <span class="settings-box-icon">🔐</span>
+                  <h4 class="settings-box-heading">ورود به حساب کاربری</h4>
+                </div>
+                <p class="settings-box-subtext">برای دسترسی به همگام‌سازی ابری بوکمارک‌ها، یادداشت‌ها و تنظیمات شخصی وارد شوید.</p>
+                
+                <div class="auth-alert-box error" id="alert-login-error" style="display: none;"></div>
+                <div class="auth-alert-box success" id="alert-login-success" style="display: none;"></div>
+
+                <form id="form-account-login" novalidate>
+                  <div class="form-group" style="margin-bottom: 0.75rem;">
+                    <label class="form-label" for="login-input-email">آدرس ایمیل: *</label>
+                    <input type="email" id="login-input-email" class="form-input form-input-ltr" placeholder="user@example.com" required />
+                    <div class="form-error-msg" id="err-login-email"></div>
+                  </div>
+
+                  <div class="form-group" style="margin-bottom: 0.5rem;">
+                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.25rem;">
+                      <label class="form-label" for="login-input-pass" style="margin-bottom: 0;">رمز عبور: *</label>
+                      <button type="button" id="btn-forgot-password-link" class="auth-link-btn">فراموشی رمز عبور؟</button>
+                    </div>
+                    <div class="password-input-wrapper">
+                      <input type="password" id="login-input-pass" class="form-input form-input-ltr" placeholder="حداقل ۶ کاراکتر" required />
+                      <button type="button" class="btn-toggle-password" data-target="login-input-pass" title="نمایش/پنهان‌سازی رمز">👁️</button>
+                    </div>
+                    <div class="form-error-msg" id="err-login-pass"></div>
+                  </div>
+
+                  <div style="display: flex; gap: 0.6rem; justify-content: flex-end; margin-top: 1rem;">
+                    <button type="submit" id="btn-submit-login" class="btn-accent" style="flex: 1; padding: 0.75rem; font-size: 0.88rem;">
+                      <span>🔑</span>
+                      <span id="btn-login-text">ورود به حساب کاربری</span>
+                    </button>
+                  </div>
+
+                  <div style="text-align: center; margin-top: 0.85rem; font-size: 0.78rem; color: var(--text-secondary);">
+                    <span>هنوز حساب کاربری ندارید؟</span>
+                    <button type="button" id="btn-switch-to-register-link" class="auth-link-btn" style="margin-right: 0.35rem;">ایجاد حساب جدید</button>
+                  </div>
+                </form>
+              </div>
+            </div>
+
+            <!-- پنل ۲: بازیابی رمز عبور (Forgot Password Panel) -->
+            <div id="auth-forgot-panel" class="auth-panel" style="display: none;">
+              <div class="settings-box">
+                <div class="settings-box-heading-row">
+                  <span class="settings-box-icon">🔄</span>
+                  <h4 class="settings-box-heading">بازیابی رمز عبور</h4>
+                </div>
+                <p class="settings-box-subtext">آدرس ایمیل حساب خود را وارد کنید تا لینک رسمی بازیابی رمز عبور برایتان ارسال شود.</p>
+
+                <div class="auth-alert-box error" id="alert-forgot-error" style="display: none;"></div>
+                <div class="auth-alert-box success" id="alert-forgot-success" style="display: none;"></div>
+
+                <!-- Forgot Step 1: Request Reset Link -->
+                <div id="forgot-step-1">
+                  <form id="form-forgot-request" novalidate>
+                    <div class="form-group" style="margin-bottom: 0.75rem;">
+                      <label class="form-label" for="forgot-input-email">آدرس ایمیل حساب کاربری: *</label>
+                      <input type="email" id="forgot-input-email" class="form-input form-input-ltr" placeholder="user@example.com" required />
+                      <div class="form-error-msg" id="err-forgot-email"></div>
+                    </div>
+                    <div style="display: flex; gap: 0.6rem; justify-content: flex-end; margin-top: 1rem;">
+                      <button type="button" id="btn-forgot-back-to-login" class="btn-secondary" style="padding: 0.7rem 1rem;">
+                        <span>بازگشت به ورود</span>
+                      </button>
+                      <button type="submit" id="btn-submit-forgot" class="btn-accent" style="flex: 1; padding: 0.7rem;">
+                        <span>📨</span>
+                        <span id="btn-forgot-text">ارسال لینک بازیابی رمز عبور</span>
+                      </button>
+                    </div>
+                  </form>
+                </div>
+
+                <!-- Forgot Step 2: Confirmation Notice -->
+                <div id="forgot-step-2" style="display: none;">
+                  <div class="auth-success-screen">
+                    <div class="auth-success-icon">📬</div>
+                    <h3 class="auth-success-title">لینک بازیابی رمز عبور ارسال شد!</h3>
+                    <p class="auth-success-desc">
+                      ایمیلی حاوی پیوند بازیابی رمز عبور به آدرس <strong id="forgot-target-email-text" style="color: #60a5fa; direction: ltr; display: inline-block;"></strong> ارسال گردید.
+                      لطفاً صندوق ورودی (Inbox) یا پوشه اسپم (Spam) ایمیل خود را بررسی کرده و روی لینک کلیک کنید.
+                    </p>
+                    <div class="otp-timer-bar" style="width: 100%; margin-top: 0.75rem;">
+                      <span id="forgot-timer-text">امکان ارسال مجدد: <strong id="forgot-countdown">۰۰:۵۹</strong></span>
+                      <button type="button" id="btn-forgot-resend-link" class="btn-resend-otp" disabled>ارسال مجدد لینک</button>
+                    </div>
+                    <div style="display: flex; gap: 0.6rem; justify-content: center; margin-top: 1.2rem; width: 100%;">
+                      <button type="button" id="btn-forgot-goto-login" class="btn-accent" style="padding: 0.75rem 1.8rem;">
+                        <span>🔑</span>
+                        <span>بازگشت به صفحه ورود</span>
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- پنل ۳: فرآیند ثبت‌نام (Sign Up Flow) -->
+            <div id="auth-register-panel" class="auth-panel" style="display: none;">
+              <div class="settings-box">
+                <!-- Register Step 1: Info Collection -->
+                <div id="register-step-1">
+                  <div class="settings-box-heading-row">
+                    <span class="settings-box-icon">✨</span>
+                    <h4 class="settings-box-heading">ایجاد حساب کاربری جدید</h4>
+                  </div>
+                  <p class="settings-box-subtext">با ایجاد حساب کاربری، بوکمارک‌ها، یادداشت‌ها و تنظیمات شخصی شما در سیستم امن Firebase همگام‌سازی می‌شوند.</p>
+                  
+                  <div class="auth-alert-box error" id="alert-register-error" style="display: none;"></div>
+                  <div class="auth-alert-box success" id="alert-register-success" style="display: none;"></div>
+
+                  <form id="form-account-register" novalidate>
+                    <div class="form-group" style="margin-bottom: 0.75rem;">
+                      <label class="form-label" for="reg-input-name">نام و نام خانوادگی: *</label>
+                      <input type="text" id="reg-input-name" class="form-input" placeholder="مثال: علی احمدی" required />
+                      <div class="form-error-msg" id="err-reg-name"></div>
+                    </div>
+
+                    <div class="form-group" style="margin-bottom: 0.75rem;">
+                      <label class="form-label" for="reg-input-email">آدرس ایمیل معتبر: *</label>
+                      <input type="email" id="reg-input-email" class="form-input form-input-ltr" placeholder="user@example.com" required />
+                      <div class="form-error-msg" id="err-reg-email"></div>
+                    </div>
+
+                    <div class="form-row-2col" style="margin-bottom: 0.35rem;">
+                      <div class="form-group">
+                        <label class="form-label" for="reg-input-pass">رمز عبور: *</label>
+                        <div class="password-input-wrapper">
+                          <input type="password" id="reg-input-pass" class="form-input form-input-ltr" placeholder="حداقل ۶ کاراکتر" required />
+                          <button type="button" class="btn-toggle-password" data-target="reg-input-pass" title="نمایش/پنهان‌سازی">👁️</button>
+                        </div>
+                        <div class="form-error-msg" id="err-reg-pass"></div>
+                      </div>
+                      <div class="form-group">
+                        <label class="form-label" for="reg-input-confpass">تکرار رمز عبور: *</label>
+                        <div class="password-input-wrapper">
+                          <input type="password" id="reg-input-confpass" class="form-input form-input-ltr" placeholder="تکرار رمز عبور" required />
+                          <button type="button" class="btn-toggle-password" data-target="reg-input-confpass" title="نمایش/پنهان‌سازی">👁️</button>
+                        </div>
+                        <div class="form-error-msg" id="err-reg-confpass"></div>
+                      </div>
+                    </div>
+
+                    <div class="pass-strength-container" id="reg-pass-strength" style="display: none;">
+                      <div class="pass-strength-bar"><div class="pass-strength-fill" id="reg-strength-fill"></div></div>
+                      <span class="pass-strength-text" id="reg-strength-text">قدرت رمز: متوسط</span>
+                    </div>
+
+                    <div style="display: flex; gap: 0.6rem; justify-content: flex-end; margin-top: 1rem;">
+                      <button type="submit" id="btn-submit-register" class="btn-accent" style="flex: 1; padding: 0.75rem; font-size: 0.88rem;">
+                        <span>✨</span>
+                        <span id="btn-register-text">ثبت‌نام و ارسال ایمیل تأیید</span>
+                      </button>
+                    </div>
+
+                    <div style="text-align: center; margin-top: 0.85rem; font-size: 0.78rem; color: var(--text-secondary);">
+                      <span>قبلاً حساب کاربری ساخته‌اید؟</span>
+                      <button type="button" id="btn-switch-to-login-link" class="auth-link-btn" style="margin-right: 0.35rem;">ورود به حساب</button>
+                    </div>
+                  </form>
+                </div>
+
+                <!-- Register Step 2: Verification Sent Screen -->
+                <div id="register-step-2" style="display: none;">
+                  <div class="auth-success-screen">
+                    <div class="auth-success-icon">📩</div>
+                    <h3 class="auth-success-title">ثبت‌نام با موفقیت انجام شد!</h3>
+                    <p class="auth-success-desc">
+                      لینک فعال‌سازی و تأیید هویت به آدرس <strong id="register-target-email-text" style="color: #60a5fa; direction: ltr; display: inline-block;"></strong> ارسال شد.
+                      لطفاً صندوق ورودی (Inbox) یا پوشه هرزنامه (Spam) ایمیل خود را بررسی نموده و روی لینک کلیک کنید.
+                    </p>
+                    <div class="otp-timer-bar" style="width: 100%; margin-top: 0.75rem;">
+                      <span id="reg-timer-text">امکان ارسال مجدد ایمیل: <strong id="reg-countdown">۰۰:۵۹</strong></span>
+                      <button type="button" id="btn-reg-resend-email" class="btn-resend-otp" disabled>ارسال مجدد ایمیل تأیید</button>
+                    </div>
+                    <div style="display: flex; gap: 0.6rem; justify-content: center; flex-wrap: wrap; margin-top: 1.2rem; width: 100%;">
+                      <button type="button" id="btn-reg-goto-login" class="btn-secondary" style="padding: 0.75rem 1.5rem;">
+                        <span>🔑</span>
+                        <span>رفتن به صفحه ورود</span>
+                      </button>
+                      <button type="button" id="btn-reg-goto-dashboard" class="btn-accent" style="padding: 0.75rem 1.8rem;">
+                        <span>🚀</span>
+                        <span>ورود به داشبورد</span>
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- View 3: Profile Management & Settings (when logged in or editing profile) -->
+            <div id="auth-profile-panel" class="auth-panel" style="display: none;">
+              <!-- الف) اطلاعات پایه (Basic Info) -->
+              <div class="settings-box">
+                <div class="settings-box-heading-row">
+                  <span class="settings-box-icon">📝</span>
+                  <h4 class="settings-box-heading">الف) اطلاعات پایه و پروفایل (Profile Info)</h4>
+                </div>
+
+                <div class="form-row-2col">
+                  <div class="form-group">
+                    <label class="form-label" for="input-edit-displayname">نام و نام خانوادگی:</label>
+                    <input type="text" id="input-edit-displayname" class="form-input" placeholder="مثال: کاربر گرامی" />
+                    <div class="form-error-msg" id="err-profile-name"></div>
+                  </div>
+                  <div class="form-group">
+                    <label class="form-label" for="input-edit-username">نام کاربری (@username):</label>
+                    <input type="text" id="input-edit-username" class="form-input form-input-ltr" placeholder="user2026" />
+                    <div class="form-error-msg" id="err-profile-uname"></div>
+                  </div>
+                </div>
+
+                <div class="form-row-2col">
+                  <div class="form-group">
+                    <label class="form-label" for="input-edit-email">ایمیل اصلی:</label>
+                    <input type="email" id="input-edit-email" class="form-input form-input-ltr" placeholder="name@domain.com" />
+                    <div class="form-error-msg" id="err-profile-email"></div>
+                  </div>
+                  <div class="form-group">
+                    <label class="form-label" for="input-edit-phone">شماره تماس پشتیبان:</label>
+                    <input type="tel" id="input-edit-phone" class="form-input form-input-ltr" placeholder="+98 912 000 0000" />
+                  </div>
+                </div>
+
+                <div class="form-group">
+                  <label class="form-label" for="input-edit-bio">درباره من / بیوگرافی:</label>
+                  <textarea id="input-edit-bio" class="form-input" rows="2" placeholder="توضیحات کوتاه درباره خودتان، علایق یا تخصص..."></textarea>
+                </div>
+
+                <!-- Password Change Sub-section -->
+                <div class="settings-subgroup password-change-box">
+                  <div class="settings-subgroup-label" id="label-password-change-heading">🔑 تغییر / تنظیم رمز عبور:</div>
+                  <div class="form-row-3col" id="row-password-inputs">
+                    <div class="form-group" id="group-current-pass">
+                      <label class="form-label" for="input-current-pass" style="font-size: 0.76rem;">رمز عبور فعلی: *</label>
+                      <div class="password-input-wrapper">
+                        <input type="password" id="input-current-pass" class="form-input form-input-ltr" placeholder="رمز عبور فعلی" />
+                        <button type="button" class="btn-toggle-password" data-target="input-current-pass" title="نمایش/پنهان‌سازی">👁️</button>
+                      </div>
+                      <div class="form-error-msg" id="err-profile-curpass"></div>
+                    </div>
+                    <div class="form-group">
+                      <label class="form-label" for="input-new-pass" style="font-size: 0.76rem;">رمز عبور جدید: *</label>
+                      <div class="password-input-wrapper">
+                        <input type="password" id="input-new-pass" class="form-input form-input-ltr" placeholder="حداقل ۶ کاراکتر" />
+                        <button type="button" class="btn-toggle-password" data-target="input-new-pass" title="نمایش/پنهان‌سازی">👁️</button>
+                      </div>
+                      <div class="form-error-msg" id="err-profile-newpass"></div>
+                    </div>
+                    <div class="form-group">
+                      <label class="form-label" for="input-confirm-pass" style="font-size: 0.76rem;">تکرار رمز جدید: *</label>
+                      <div class="password-input-wrapper">
+                        <input type="password" id="input-confirm-pass" class="form-input form-input-ltr" placeholder="تکرار رمز جدید" />
+                        <button type="button" class="btn-toggle-password" data-target="input-confirm-pass" title="نمایش/پنهان‌سازی">👁️</button>
+                      </div>
+                      <div class="form-error-msg" id="err-profile-confpass"></div>
+                    </div>
+                  </div>
+                </div>
+
+                <div style="display: flex; justify-content: flex-end; margin-top: 0.35rem;">
+                  <button type="button" id="btn-save-profile-info" class="btn-accent">
+                    <span>💾</span>
+                    <span>ذخیره تغییرات پروفایل</span>
+                  </button>
+                </div>
+              </div>
+
+              <!-- ب) امنیت و نشست‌ها (Security & Sessions) -->
+              <div class="settings-box">
+                <div class="settings-box-heading-row">
+                  <span class="settings-box-icon">🛡️</span>
+                  <h4 class="settings-box-heading">ب) امنیت و نشست‌ها (Security & Sessions)</h4>
+                </div>
+
+                <!-- Active Sessions List -->
+                <div class="settings-subgroup" style="margin-top: 0.5rem;">
+                  <div class="settings-subgroup-label">💻 نشست‌ها و دستگاه‌های فعال:</div>
+                  <div class="sessions-list" id="active-sessions-container">
+                    <!-- Real Device Dynamically Detected -->
+                    <div class="session-item current-session" id="current-device-session-item">
+                      <div class="session-icon" id="current-device-icon">💻</div>
+                      <div class="session-details">
+                        <div class="session-device">
+                          <span id="current-device-name">مرورگر فعلی (در حال تشخیص...)</span>
+                          <span class="session-badge-current">نشست فعلی (این دستگاه)</span>
+                        </div>
+                        <div class="session-meta" id="current-device-meta">ایران • هم‌اکنون آنلاین و فعال</div>
+                      </div>
+                    </div>
+                  </div>
+                  <button type="button" id="btn-terminate-sessions" class="btn-breadcrumb-back" style="margin-top: 0.5rem; align-self: flex-start; font-size: 0.76rem; color: #fbbf24; border-color: rgba(251, 191, 36, 0.4);">
+                    <span>🚪</span>
+                    <span>خروج از تمامی دستگاه‌ها (Logout All Sessions)</span>
+                  </button>
+                </div>
+              </div>
+
+              <!-- ج) مدیریت حساب (Account Actions) -->
+              <div class="settings-box settings-danger-box">
+                <div class="settings-box-heading-row">
+                  <span class="settings-box-icon">⚠️</span>
+                  <h4 class="settings-box-heading" style="color: #f43f5e;">ج) مدیریت و اقدامات حساب (Account Actions)</h4>
+                </div>
+
+                <div style="display: flex; gap: 0.75rem; flex-wrap: wrap;">
+                  <button type="button" id="btn-account-logout" class="btn-breadcrumb-back" style="flex: 1; min-width: 140px; color: #fbbf24; border-color: rgba(251, 191, 36, 0.4);">
+                    <span>🚪</span>
+                    <span>خروج از حساب (Log Out)</span>
+                  </button>
+                  <button type="button" id="btn-account-delete" class="btn-breadcrumb-back" style="flex: 1; min-width: 140px; color: #f43f5e; border-color: rgba(244, 63, 94, 0.5);">
+                    <span>🗑️</span>
+                    <span>حذف کامل حساب کاربری (Delete)</span>
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Tab 1: Theme -->
+          <div id="tab-content-theme" class="settings-tab-panel">
+            <div class="form-group">
+              <label class="form-label">انتخاب تم سراسری داشبورد:</label>
+              <div class="preset-grid">
+                <div class="preset-card" data-theme-choice="dark">
+                  <div class="preset-card-icon">🌙</div>
+                  <h4>تاریک (Dark)</h4>
+                </div>
+                <div class="preset-card" data-theme-choice="light">
+                  <div class="preset-card-icon">☀️</div>
+                  <h4>روشن (Light)</h4>
+                </div>
+                <div class="preset-card" data-theme-choice="liquid-glass">
+                  <div class="preset-card-icon">💎</div>
+                  <h4>شیشه‌ای (Liquid Glass)</h4>
+                </div>
+              </div>
+            </div>
+
+            <!-- Consolidated Dedicated Liquid Glass Settings Block -->
+            <div class="settings-box settings-liquid-glass-block" id="box-liquid-glass-options" style="display: none;">
+              <div class="settings-glass-block-header">
+                <div class="settings-glass-block-title-wrap">
+                  <span class="settings-glass-block-icon">💎</span>
+                  <div>
+                    <div class="settings-glass-block-title">قالب اختصاصی و تنظیمات تم شیشه‌ای (Liquid Glass)</div>
+                    <div class="settings-glass-block-subtitle">تنظیمات بلور عمیق اپل، ماتی، شفافیت و بازتاب نور کارت‌ها</div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- 1. Glass Style Preset -->
+              <div class="settings-subgroup">
+                <span class="settings-subgroup-label">سبک و جلوه شیشه:</span>
+                <div class="segmented-control" id="seg-glass-mode">
+                  <button type="button" class="segment-btn active" data-glass-mode="frosted">
+                    <span>🌫️ مات آیفون (Frosted)</span>
+                  </button>
+                  <button type="button" class="segment-btn" data-glass-mode="specular">
+                    <span>✨ کریستالی براق (Specular)</span>
+                  </button>
+                  <button type="button" class="segment-btn" data-glass-mode="smoked">
+                    <span>🌑 دودی پرکنتراست (Smoked)</span>
+                  </button>
+                </div>
+              </div>
+
+              <!-- 2. Glass Opacity Preset -->
+              <div class="settings-subgroup">
+                <span class="settings-subgroup-label">میزان غلظت و پوشش شیشه:</span>
+                <div class="segmented-control" id="seg-glass-opacity">
+                  <button type="button" class="segment-btn" data-glass-opacity="15">زلال (۱۵٪)</button>
+                  <button type="button" class="segment-btn active" data-glass-opacity="24">استاندارد لوکس (۲۴٪)</button>
+                  <button type="button" class="segment-btn" data-glass-opacity="38">متراکم (۳۸٪)</button>
+                </div>
+              </div>
+
+              <!-- 3. Glass Blur Preset -->
+              <div class="settings-subgroup" style="margin-bottom: 0;">
+                <span class="settings-subgroup-label">شدت ماتی و تاری پشت شیشه (Glass Blur):</span>
+                <div class="segmented-control" id="seg-glass-blur">
+                  <button type="button" class="segment-btn" data-glass-blur="18">ملایم (۱۸px)</button>
+                  <button type="button" class="segment-btn active" data-glass-blur="32">عمیق استاندارد (۳۲px)</button>
+                  <button type="button" class="segment-btn" data-glass-blur="48">فوق متراکم (۴۸px)</button>
+                </div>
+              </div>
+            </div>
+
+            <!-- Dynamic Accent Color Selection -->
+            <div class="settings-box">
+              <label class="form-label">رنگ تاکیدی (Accent Color):</label>
+              <div class="accent-palette-container">
+                <div class="accent-palette-grid" id="accent-palette-picker">
+                  <button type="button" class="accent-swatch active" data-accent="#3b82f6" data-accent-color="#3b82f6" style="--swatch-color: #3b82f6; --swatch-contrast: #ffffff;" title="آبی (Blue)">
+                    <span class="swatch-check">✓</span>
+                  </button>
+                  <button type="button" class="accent-swatch" data-accent="#8b5cf6" data-accent-color="#8b5cf6" style="--swatch-color: #8b5cf6; --swatch-contrast: #ffffff;" title="بنفش (Purple)">
+                    <span class="swatch-check">✓</span>
+                  </button>
+                  <button type="button" class="accent-swatch" data-accent="#ec4899" data-accent-color="#ec4899" style="--swatch-color: #ec4899; --swatch-contrast: #ffffff;" title="صورتی (Pink)">
+                    <span class="swatch-check">✓</span>
+                  </button>
+                  <button type="button" class="accent-swatch" data-accent="#10b981" data-accent-color="#10b981" style="--swatch-color: #10b981; --swatch-contrast: #ffffff;" title="سبز (Green)">
+                    <span class="swatch-check">✓</span>
+                  </button>
+                  <button type="button" class="accent-swatch" data-accent="#06b6d4" data-accent-color="#06b6d4" style="--swatch-color: #06b6d4; --swatch-contrast: #ffffff;" title="فیروزه‌ای (Cyan)">
+                    <span class="swatch-check">✓</span>
+                  </button>
+                  <button type="button" class="accent-swatch" data-accent="#f97316" data-accent-color="#f97316" style="--swatch-color: #f97316; --swatch-contrast: #ffffff;" title="نارنجی (Orange)">
+                    <span class="swatch-check">✓</span>
+                  </button>
+                  <button type="button" class="accent-swatch" data-accent="#ef4444" data-accent-color="#ef4444" style="--swatch-color: #ef4444; --swatch-contrast: #ffffff;" title="قرمز (Red)">
+                    <span class="swatch-check">✓</span>
+                  </button>
+                  <button type="button" class="accent-swatch" data-accent="#eab308" data-accent-color="#eab308" style="--swatch-color: #eab308; --swatch-contrast: #1c1c1e;" title="زرد (Yellow)">
+                    <span class="swatch-check">✓</span>
+                  </button>
+                  <button type="button" class="accent-swatch" data-accent="#18181b" data-accent-color="#18181b" style="--swatch-color: #18181b; --swatch-contrast: #ffffff;" title="مشکی (Black)">
+                    <span class="swatch-check">✓</span>
+                  </button>
+                  <button type="button" class="accent-swatch" data-accent="#ffffff" data-accent-color="#ffffff" style="--swatch-color: #ffffff; --swatch-contrast: #18181b; border: 1.5px solid rgba(0,0,0,0.25);" title="سفید (White)">
+                    <span class="swatch-check">✓</span>
+                  </button>
+                  <div class="accent-swatch-custom-wrap" title="انتخاب رنگ سفارشی (Custom Color)">
+                    <input type="color" id="accent-custom-color-input" value="#3b82f6" title="انتخاب رنگ سفارشی" />
+                    <span style="font-size: 0.85rem; pointer-events: none;">🎨</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Text Color / Contrast Selection -->
+            <div class="settings-box">
+              <label class="form-label">رنگ و کنتراست فونت و نوشته‌ها:</label>
+              <div class="segmented-control" id="seg-text-contrast">
+                <button type="button" class="segment-btn" data-contrast="auto">خودکار (Auto)</button>
+                <button type="button" class="segment-btn" data-contrast="light">نوشته‌های روشن (سفید)</button>
+                <button type="button" class="segment-btn" data-contrast="dark">نوشته‌های تیره (مشکی)</button>
+              </div>
+            </div>
+
+            <!-- Card & Icon Presets -->
+            <div class="settings-box">
+              <label class="form-label">اندازه کارت‌ها و آیکون بوکمارک‌ها:</label>
+              
+              <!-- Card Size Preset -->
+              <div class="settings-subgroup">
+                <span class="settings-subgroup-label">اندازه کارت بوکمارک:</span>
+                <div class="segmented-control" id="seg-card-size">
+                  <button type="button" class="segment-btn active" data-card-size="120">کوچک (۱۲۰px)</button>
+                  <button type="button" class="segment-btn" data-card-size="145">متوسط (۱۴۵px)</button>
+                  <button type="button" class="segment-btn" data-card-size="175">بزرگ (۱۷۵px)</button>
+                </div>
+              </div>
+
+              <!-- Icon Size Preset -->
+              <div class="settings-subgroup">
+                <span class="settings-subgroup-label">اندازه آیکون بوکمارک:</span>
+                <div class="segmented-control" id="seg-icon-size">
+                  <button type="button" class="segment-btn" data-icon-size="small">کوچک</button>
+                  <button type="button" class="segment-btn active" data-icon-size="medium">متوسط</button>
+                  <button type="button" class="segment-btn" data-icon-size="large">بزرگ</button>
+                </div>
+              </div>
+
+              <!-- Corner Radius -->
+              <div class="settings-subgroup">
+                <span class="settings-subgroup-label">گردی گوشه کارت‌های بوکمارک:</span>
+                <div class="segmented-control" id="seg-card-radius">
+                  <button type="button" class="segment-btn" data-card-radius="8">مستطیلی (۸px)</button>
+                  <button type="button" class="segment-btn active" data-card-radius="22">استاندارد (۲۲px)</button>
+                  <button type="button" class="segment-btn" data-card-radius="32">گرد (۳۲px)</button>
+                </div>
+              </div>
+            </div>
+
+            <!-- Performance / Low-Spec Mode -->
+            <div class="settings-box settings-highlight-box">
+              <div class="settings-row-between">
+                <div class="settings-row-info">
+                  <span class="settings-row-icon">⚡</span>
+                  <div>
+                    <div class="settings-row-title">حالت سیستم‌های ضعیف (Performance Mode)</div>
+                    <div class="settings-row-desc">
+                      خاموش کردن مات‌کننده‌های شیشه‌ای (Glass Blur)، سایه‌ها و انیمیشن‌های سنگین برای روانی کامل و بدون لگ
+                    </div>
+                  </div>
+                </div>
+                <label class="toggle-switch" title="فعال/غیرفعال‌سازی حالت مخصوص سیستم‌های ضعیف">
+                  <input type="checkbox" id="toggle-low-spec" />
+                  <span class="toggle-slider"></span>
+                </label>
+              </div>
+            </div>
+
+          </div>
+
+          <!-- Tab 2: Wallpaper -->
+          <div id="tab-content-wallpaper" class="settings-tab-panel">
+            <!-- Dedicated Wallpaper Modal Trigger Box -->
+            <div class="settings-box wallpaper-modal-trigger-box" style="padding: 1.25rem; border-radius: 16px; background: rgba(255, 255, 255, 0.05); border: 1px solid var(--glass-border); margin-bottom: 1.25rem;">
+              <div style="display: flex; align-items: center; justify-content: space-between; gap: 1rem; flex-wrap: wrap;">
+                <div class="settings-row-info" style="display: flex; align-items: center; gap: 0.85rem;">
+                  <span class="settings-row-icon" style="font-size: 2rem;">🖼️</span>
+                  <div>
+                    <div class="settings-row-title" style="font-size: 1rem; font-weight: 800; color: #ffffff;">گالری والپیپرهای اختصاصی الماس</div>
+                    <div class="settings-row-desc" style="font-size: 0.8rem; color: var(--text-secondary); margin-top: 0.2rem;">دسترسی به مجموعه والپیپرهای باکیفیت 4K (طبیعت، مدرن، AMOLED، سایبرپانک و نئون)</div>
+                  </div>
+                </div>
+                <button type="button" class="btn-accent" id="btn-open-wallpaper-modal" style="padding: 0.65rem 1.35rem; font-weight: 700; border-radius: 12px; display: inline-flex; align-items: center; gap: 0.5rem; cursor: pointer;">
+                  <span>🖼️</span>
+                  <span>مشاهده و انتخاب والپیپر</span>
+                </button>
+              </div>
+            </div>
+
+            <div class="settings-box">
+              <label class="form-label">بارگذاری والپیپر دلخواه از کامپیوتر:</label>
+              <input type="file" id="input-custom-wallpaper" accept="image/*" class="form-input" />
+            </div>
+
+            <!-- Wallpaper Effect Presets -->
+            <div class="settings-box">
+              <label class="form-label">تنظیم افکت‌ها و تیرگی تصویر پس‌زمینه:</label>
+              
+              <!-- Background Blur Preset -->
+              <div class="settings-subgroup">
+                <span class="settings-subgroup-label">میزان تاری پس‌زمینه (Background Blur):</span>
+                <div class="segmented-control" id="seg-bg-blur">
+                  <button type="button" class="segment-btn active" data-bg-blur="0">بدون تاری (شفاف)</button>
+                  <button type="button" class="segment-btn" data-bg-blur="8">مات ملایم (۸px)</button>
+                  <button type="button" class="segment-btn" data-bg-blur="18">مات عمیق (۱۸px)</button>
+                </div>
+              </div>
+
+              <!-- Overlay Darkness Preset -->
+              <div class="settings-subgroup">
+                <span class="settings-subgroup-label">تیرگی لایه پس‌زمینه (Overlay Darkness):</span>
+                <div class="segmented-control" id="seg-overlay-opacity">
+                  <button type="button" class="segment-btn" data-overlay-opacity="20">روشن (۲۰٪)</button>
+                  <button type="button" class="segment-btn active" data-overlay-opacity="45">متعادل (۴۵٪)</button>
+                  <button type="button" class="segment-btn" data-overlay-opacity="70">تاریک (۷۰٪)</button>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Tab 4: Backup & Sync -->
+          <div id="tab-content-backup" class="settings-tab-panel">
+            <!-- Chrome / Browser Bookmarks Auto-Sync -->
+            <div class="settings-box">
+              <div class="settings-box-heading-row">
+                <span class="settings-box-icon">🔄</span>
+                <h4 class="settings-box-heading">همگام‌سازی مستقیم با بوکمارک‌های مرورگر</h4>
+              </div>
+              <p class="settings-box-subtext">
+                شناسایی و دریافت خودکار تمامی پوشه‌ها، زیرپوشه‌ها و بوکمارک‌های مرورگر با حفظ ۱۰۰٪ ساختار درختی، آیکون‌ها و دسته‌بندی‌ها به طور مستقیم از افزونه.
+              </p>
+              <button type="button" id="btn-sync-browser-bookmarks" class="btn-accent" style="width: 100%; display: flex; align-items: center; justify-content: center; gap: 0.5rem; padding: 0.75rem 1rem;">
+                <span style="font-size: 1.1rem;">⚡</span>
+                <span style="font-weight: 800;">همگام‌سازی و شناسایی خودکار پوشه‌های مرورگر</span>
+              </button>
+            </div>
+
+            <!-- JSON Backup -->
+            <div class="settings-box">
+              <div class="settings-box-heading-row">
+                <span class="settings-box-icon">💾</span>
+                <h4 class="settings-box-heading">پشتیبان‌گیری فایل JSON</h4>
+              </div>
+              <div style="display: flex; gap: 0.75rem; flex-wrap: wrap;">
+                <button type="button" id="btn-export-json" class="btn-accent" style="flex: 1; min-width: 140px;">
+                  دانلود فایل پشتیبان (Export)
+                </button>
+                <label class="btn-breadcrumb-back" style="flex: 1; min-width: 140px; text-align: center; cursor: pointer; display: flex; align-items: center; justify-content: center;">
+                  بارگذاری فایل پشتیبان (Import)
+                  <input type="file" id="input-import-json" accept=".json" style="display: none;" />
+                </label>
+              </div>
+            </div>
+
+            <!-- Factory Reset -->
+            <div class="settings-box settings-danger-box">
+              <div class="settings-box-heading-row">
+                <span class="settings-box-icon">⚠️</span>
+                <h4 class="settings-box-heading" style="color: #f43f5e;">بازگشت به تنظیمات اولیه</h4>
+              </div>
+              <button type="button" id="btn-reset-defaults" class="btn-breadcrumb-back" style="color: #f43f5e; border-color: #f43f5e;">
+                ریست کامل بوکمارک‌ها و تنظیمات
+              </button>
+            </div>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn-accent" data-close-modal>بستن و ذخیره</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Modal: Calendar Task & Reminder Prompt -->
+    <div id="cal-task-modal" class="modal-overlay">
+      <div class="modal-dialog glass-panel" style="max-width: 440px;">
+        <div class="modal-header">
+          <h3 style="display: flex; align-items: center; gap: 0.4rem;">
+            <span class="modal-header-icon">⏰</span>
+            <span id="cal-modal-title-text">ثبت یادآور و رویداد تقویم</span>
+          </h3>
+          <button class="btn-icon" data-close-modal>✕</button>
+        </div>
+        <form id="form-add-cal-task">
+          <div class="modal-body" style="padding: 1.25rem 1.5rem; display: flex; flex-direction: column; gap: 0.9rem;">
+            <div>
+              <label class="form-label" for="task-input-date-display">تاریخ انتخابی (شمسی):</label>
+              <input type="text" id="task-input-date-display" class="form-input" readonly style="opacity: 0.9; font-weight: 700; background: rgba(255,255,255,0.06);" />
+            </div>
+
+            <div>
+              <label class="form-label" for="task-input-title">عنوان رویداد یا تسک: *</label>
+              <input type="text" id="task-input-title" class="form-input" placeholder="مثلاً: جلسه کاری، پرداخت قبض، مرور درس..." required />
+            </div>
+
+            <div style="display: grid; grid-template-columns: 1fr 1.1fr; gap: 0.75rem;">
+              <div>
+                <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 0.25rem;">
+                  <label class="form-label" for="task-input-time" style="margin-bottom: 0;">ساعت سررسید:</label>
+                  <label style="font-size: 0.72rem; color: var(--accent-color); cursor: pointer; display: flex; align-items: center; gap: 3px;">
+                    <input type="checkbox" id="task-all-day-checkbox" style="cursor: pointer;" />
+                    <span>تمام‌روز</span>
+                  </label>
+                </div>
+                <input type="time" id="task-input-time" class="form-input" value="10:00" />
+              </div>
+              <div>
+                <label class="form-label" for="task-input-tag">برچسب / اولویت:</label>
+                <select id="task-input-tag" class="form-input">
+                  <option value="important">🔴 فوری و مهم</option>
+                  <option value="work" selected>💼 کار و پروژه</option>
+                  <option value="personal">🌿 زندگی شخصی</option>
+                  <option value="meeting">👥 جلسه و تماس</option>
+                  <option value="finance">💳 امور مالی</option>
+                </select>
+              </div>
+            </div>
+
+            <div>
+              <label class="form-label" for="task-input-desc">توضیحات و یادداشت تکمیلی (اختیاری):</label>
+              <textarea id="task-input-desc" class="form-input" rows="3" placeholder="توضیحات کامل، یادداشت یا شماره تماس مربوط به این تسک..." style="resize: vertical;"></textarea>
+            </div>
+          </div>
+          <div class="modal-footer" style="gap: 0.6rem;">
+            <button type="button" class="btn-breadcrumb-back" data-close-modal style="flex: 1;">انصراف</button>
+            <button type="submit" class="btn-accent" style="flex: 1.4;">
+              <span>🔔 ذخیره رویداد</span>
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+
+    <!-- Modal: Calendar Task Detail & Full Note Reader -->
+    <div id="cal-task-detail-modal" class="modal-overlay">
+      <div class="modal-dialog glass-panel" style="max-width: 460px;">
+        <div class="modal-header">
+          <h3 style="display: flex; align-items: center; gap: 0.4rem;">
+            <span class="modal-header-icon" id="task-detail-icon">📋</span>
+            <span id="task-detail-modal-title">جزئیات تسک و یادداشت</span>
+          </h3>
+          <button class="btn-icon" data-close-modal>✕</button>
+        </div>
+        <div class="modal-body" style="padding: 1.25rem 1.5rem; display: flex; flex-direction: column; gap: 0.85rem;">
+          <div style="display: flex; align-items: center; justify-content: space-between; border-bottom: 1px solid rgba(255,255,255,0.08); padding-bottom: 0.75rem;">
+            <h4 id="task-detail-name" style="font-size: 1.1rem; font-weight: 800; color: var(--text-primary); line-height: 1.4;">
+              عنوان تسک
+            </h4>
+            <span id="task-detail-badge" class="cal-task-badge" style="white-space: nowrap;">کار و پروژه</span>
+          </div>
+
+          <div class="task-detail-row">
+            <span class="task-detail-label">📅 تاریخ و زمان:</span>
+            <span class="task-detail-val" id="task-detail-datetime">۱۴۰۳/۱۲/۱۵ • ساعت ۱۰:۰۰</span>
+          </div>
+
+          <div class="task-detail-row">
+            <span class="task-detail-label">⚡ وضعیت انجام:</span>
+            <span class="task-detail-val" id="task-detail-status">در انتظار انجام</span>
+          </div>
+
+          <div style="margin-top: 0.35rem;">
+            <div class="task-detail-label" style="margin-bottom: 0.4rem; font-weight: 800;">📝 متن کامل یادداشت و توضیحات:</div>
+            <div id="task-detail-notes" class="task-detail-note-box">
+              یادداشتی برای این تسک ثبت نشده است.
+            </div>
+          </div>
+        </div>
+        <div class="modal-footer" style="gap: 0.6rem; justify-content: space-between;">
+          <button type="button" id="btn-detail-delete-task" class="btn-breadcrumb-back" style="color: #f43f5e; border-color: rgba(244, 63, 94, 0.4);">
+            <span>🗑️</span>
+            <span>حذف</span>
+          </button>
+          <div style="display: flex; gap: 0.5rem;">
+            <button type="button" id="btn-detail-toggle-task" class="btn-breadcrumb-back" style="color: #10b981; border-color: rgba(16, 185, 129, 0.4);">
+              <span>✔️</span>
+              <span id="btn-detail-toggle-text">تغییر وضعیت</span>
+            </button>
+            <button type="button" class="btn-accent" data-close-modal>
+              <span>بستن</span>
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Modal: Delete Account Confirmation -->
+    <div id="delete-account-modal" class="modal-overlay" style="z-index: 10006;">
+      <div class="modal-dialog glass-panel" style="max-width: 440px;">
+        <div class="modal-header" style="border-bottom: 1px solid rgba(244, 63, 94, 0.3);">
+          <h3 style="display: flex; align-items: center; gap: 0.5rem; color: #f43f5e;">
+            <span class="modal-header-icon" style="background: rgba(244, 63, 94, 0.15); color: #f43f5e;">🗑️</span>
+            <span>حذف کامل حساب کاربری</span>
+          </h3>
+          <button type="button" class="btn-icon" id="btn-close-delete-modal-x" title="بستن">✕</button>
+        </div>
+        <div class="modal-body" style="padding: 1.25rem 1.5rem; display: flex; flex-direction: column; gap: 1rem;">
+          <div style="background: rgba(244, 63, 94, 0.12); border: 1px solid rgba(244, 63, 94, 0.3); border-radius: 12px; padding: 0.9rem 1rem; color: #fecdd3; font-size: 0.84rem; line-height: 1.6;">
+            ⚠️ <strong>هشدار مهم:</strong> با تایید این بخش، حساب کاربری شما به طور کامل و دائمی از پایگاه داده Firebase حذف شده و تمامی دسترسی‌ها قطع خواهند شد. این اقدام <strong>غیرقابل بازگشت</strong> است.
+          </div>
+
+          <div class="form-group" id="delete-account-password-group">
+            <label class="form-label" for="input-delete-account-pass" style="font-size: 0.8rem;">رمز عبور حساب کاربری (جهت تأیید هویت امنیتی):</label>
+            <div class="password-input-wrapper">
+              <input type="password" id="input-delete-account-pass" class="form-input form-input-ltr" placeholder="رمز عبور شما" autocomplete="current-password" />
+              <button type="button" class="btn-toggle-password" data-target="input-delete-account-pass" title="نمایش/پنهان‌سازی">👁️</button>
+            </div>
+            <div class="form-error-msg" id="err-delete-account"></div>
+          </div>
+
+          <p style="font-size: 0.78rem; color: var(--text-muted); line-height: 1.5; margin: 0;">
+            برای تایید نهایی و حذف دائمی، روی دکمه زیر کلیک نمایید.
+          </p>
+        </div>
+        <div class="modal-footer" style="gap: 0.6rem; display: flex;">
+          <button type="button" class="btn-breadcrumb-back" id="btn-cancel-delete-account" style="flex: 1;">انصراف</button>
+          <button type="button" id="btn-confirm-delete-account" class="btn-accent" style="flex: 1.4; background: #e11d48; border-color: #f43f5e; box-shadow: 0 4px 14px rgba(225, 29, 72, 0.4);">
+            <span id="btn-delete-account-spinner" style="display: none;">⏳ </span>
+            <span id="btn-delete-account-text">بله، حذف دائمی حساب</span>
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Modal: Dedicated Note Editor & Rich Creator -->
+    <div id="note-edit-modal" class="modal-overlay">
+      <div class="modal-dialog modal-dialog-large glass-panel" id="modal-note-panel">
+        <div class="modal-header">
+          <h3>
+            <span class="modal-header-icon" id="modal-note-icon">📝</span>
+            <span id="modal-note-header-title">ویرایش یادداشت</span>
+          </h3>
+          <button class="btn-icon" data-close-modal title="بستن">✕</button>
+        </div>
+        <div class="modal-body" style="gap: 0.75rem;">
+          <!-- Top Row: Title & Theme Swatches -->
+          <div class="modal-note-top-row">
+            <div style="flex: 1; min-width: 180px;">
+              <input type="text" id="modal-note-title" class="modal-note-title-input" placeholder="عنوان یادداشت..." />
+            </div>
+            <div class="modal-theme-selector-wrap">
+              <span class="modal-theme-label">تم رنگی:</span>
+              <div class="modal-palette-swatches" id="modal-palette-swatches">
+                <button type="button" class="palette-swatch active" data-bg="glass" title="شیشه‌ای پیش‌فرض" style="background: rgba(15,23,42,0.6);"></button>
+                <button type="button" class="palette-swatch" data-bg="navy" title="آبی نیلگون" style="background: linear-gradient(135deg, #0f172a, #1e3a8a);"></button>
+                <button type="button" class="palette-swatch" data-bg="emerald" title="زمردی و جنگل" style="background: linear-gradient(135deg, #064e3b, #047857);"></button>
+                <button type="button" class="palette-swatch" data-bg="amethyst" title="ارغوانی و بنفش" style="background: linear-gradient(135deg, #4c1d95, #7c3aed);"></button>
+                <button type="button" class="palette-swatch" data-bg="amber" title="غروب گرم" style="background: linear-gradient(135deg, #78350f, #d97706);"></button>
+                <button type="button" class="palette-swatch" data-bg="rose" title="یاقوتی و زرشکی" style="background: linear-gradient(135deg, #881337, #e11d48);"></button>
+                <button type="button" class="palette-swatch" data-bg="titanium" title="تایتانیوم تیره" style="background: linear-gradient(135deg, #18181b, #27272a);"></button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Rich Formatting Toolbar -->
+          <div class="rich-toolbar" id="modal-rich-toolbar">
+            <div class="rich-tools-group">
+              <button type="button" class="rich-btn" data-command="bold" title="درشت (Bold)"><b>B</b></button>
+              <button type="button" class="rich-btn" data-command="italic" title="مورب (Italic)"><i>I</i></button>
+              <button type="button" class="rich-btn" data-command="underline" title="خط زیر متن (Underline)"><u>U</u></button>
+              <button type="button" class="rich-btn" data-command="strikeThrough" title="خط‌خورده"><s>S</s></button>
+            </div>
+            <div class="rich-tools-divider"></div>
+            <div class="rich-tools-group">
+              <button type="button" class="rich-btn" data-command="justifyRight" title="راست‌چین">➡️</button>
+              <button type="button" class="rich-btn" data-command="justifyCenter" title="وسط‌چین">↔️</button>
+              <button type="button" class="rich-btn" data-command="justifyLeft" title="چپ‌چین">⬅️</button>
+            </div>
+            <div class="rich-tools-divider"></div>
+            <div class="rich-tools-group">
+              <button type="button" class="rich-btn" data-command="insertUnorderedList" title="لیست نشانه‌دار">•</button>
+              <button type="button" class="rich-btn" data-command="insertOrderedList" title="لیست شماره‌دار">1.</button>
+              <label class="rich-btn file-label" title="درج تصویر در متن یادداشت">
+                <span>🖼️</span>
+                <input type="file" id="modal-input-note-image" accept="image/*" style="display: none;" />
+              </label>
+            </div>
+            <div class="rich-tools-divider"></div>
+            <div class="rich-tools-group">
+              <label class="rich-color-wrap" title="رنگ قلم متن">
+                <span style="font-size: 0.8rem; font-weight: 800;">A</span>
+                <input type="color" id="modal-note-font-color-picker" class="note-color-input" value="#ffffff" />
+              </label>
+              <button type="button" id="modal-btn-notes-timestamp" class="rich-btn" title="درج برچسب زمان جاری">
+                <span>⏰</span>
+              </button>
+            </div>
+          </div>
+
+          <!-- Content Editable Editor -->
+          <div
+            id="modal-notes-editor"
+            class="modal-notes-editor"
+            contenteditable="true"
+            placeholder="متن یادداشت خود را بنویسید... تغییرات به صورت بلادرنگ ذخیره می‌شوند."
+          ></div>
+
+          <!-- Stats & Updated Time Row -->
+          <div class="modal-notes-stats-row">
+            <span class="modal-notes-stats-badge" id="modal-notes-stats-badge">۰ کاراکتر • ۰ کلمه</span>
+            <span class="modal-notes-updated-time" id="modal-notes-updated-time">آخرین بروزرسانی: چند لحظه پیش</span>
+          </div>
+        </div>
+
+        <div class="modal-footer" style="justify-content: space-between; flex-wrap: wrap; gap: 0.5rem;">
+          <div style="display: flex; gap: 0.4rem; align-items: center;">
+            <button type="button" id="modal-btn-delete-note" class="btn-notes-clear" title="حذف این یادداشت">
+              <span>🗑️ حذف یادداشت</span>
+            </button>
+            <button type="button" id="modal-btn-clear-note" class="btn-notes-action" title="پاک‌سازی متن یادداشت">
+              <span>🧹 پاک‌سازی متن</span>
+            </button>
+            <button type="button" id="modal-btn-copy-note" class="btn-notes-action" title="کپی متن">
+              <span>📋 کپی</span>
+            </button>
+          </div>
+          <div style="display: flex; gap: 0.4rem; align-items: center;">
+            <button type="button" class="btn-breadcrumb-back" data-close-modal>بستن</button>
+            <button type="button" id="modal-btn-save-note" class="btn-accent">✓ ذخیره یادداشت</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Modal: PIN Unlock Prompt -->
+    <div id="pin-modal" class="modal-overlay">
+      <div class="modal-dialog glass-panel" style="max-width: 380px; text-align: center;">
+        <div class="modal-header" style="justify-content: center; position: relative;">
+          <h3 style="display: flex; align-items: center; gap: 0.4rem; justify-content: center;">
+            <span class="modal-header-icon" id="pin-modal-header-icon">🔐</span>
+            <span id="pin-modal-header-text">ورود رمز عبور امنیتی</span>
+          </h3>
+          <button class="btn-icon" data-close-modal style="position: absolute; left: 1rem; top: 1rem;">✕</button>
+        </div>
+        <form id="pin-unlock-form">
+          <div class="modal-body" style="padding: 1.25rem 1.5rem 1.5rem;">
+            <div id="pin-modal-icon-wrap" style="width: 52px; height: 52px; margin: 0 auto 0.75rem; border-radius: 14px; background: rgba(255, 255, 255, 0.08); display: flex; align-items: center; justify-content: center; font-size: 1.6rem; border: 1px solid rgba(255, 255, 255, 0.12);">
+              📁
+            </div>
+            <h4 id="pin-modal-title" style="font-size: 1.05rem; font-weight: 800; color: var(--text-primary); margin-bottom: 0.25rem;">
+              نام آیتم
+            </h4>
+            <p id="pin-modal-subtitle" style="font-size: 0.8rem; color: var(--text-secondary); margin-bottom: 1.25rem;">
+              لطفاً رمز عبور ۴ رقمی این مورد را وارد کنید:
+            </p>
+
+            <div style="display: flex; justify-content: center; gap: 0.6rem; margin-bottom: 0.75rem; direction: ltr;" id="pin-digits-container">
+              <input type="password" class="pin-digit-input" maxlength="1" inputmode="numeric" pattern="[0-9]" autocomplete="off" />
+              <input type="password" class="pin-digit-input" maxlength="1" inputmode="numeric" pattern="[0-9]" autocomplete="off" />
+              <input type="password" class="pin-digit-input" maxlength="1" inputmode="numeric" pattern="[0-9]" autocomplete="off" />
+              <input type="password" class="pin-digit-input" maxlength="1" inputmode="numeric" pattern="[0-9]" autocomplete="off" />
+            </div>
+
+            <div id="pin-error-msg" style="color: #ef4444; font-size: 0.78rem; font-weight: 700; min-height: 1.3rem; margin-bottom: 0.5rem; transition: opacity 0.2s;"></div>
+          </div>
+          <div class="modal-footer" style="justify-content: center; gap: 0.6rem;">
+            <button type="button" class="btn-breadcrumb-back" data-close-modal style="flex: 1;">انصراف</button>
+            <button type="submit" id="pin-modal-submit-btn" class="btn-accent" style="flex: 1.3;">
+              <span id="pin-modal-submit-icon">🔓</span>
+              <span id="pin-modal-submit-text">تایید و بازگشایی</span>
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+
+    <!-- Modal: Dedicated Wallpaper Gallery -->
+    <div id="wallpaper-modal" class="modal-overlay" style="z-index: 10005;">
+      <div class="modal-dialog modal-dialog-large glass-panel wallpaper-modal-dialog" style="max-width: 880px; width: 92%; max-height: 88vh; display: flex; flex-direction: column;">
+        <div class="modal-header">
+          <h3>
+            <span class="modal-header-icon">🖼️</span>
+            <span>گالری والپیپرهای اختصاصی الماس</span>
+          </h3>
+          <button type="button" class="btn-icon" data-close-modal title="بستن گالری">✕</button>
+        </div>
+        <div class="modal-body wallpaper-modal-body" style="flex: 1; overflow-y: auto; padding: 1.25rem;">
+          <!-- Unified Gallery Header (No category separation - single gallery view) -->
+          <div class="wallpaper-gallery-header-bar" style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 1.1rem; padding: 0.65rem 0.95rem; background: rgba(255, 255, 255, 0.05); border-radius: 12px; border: 1px solid var(--glass-border); flex-wrap: wrap; gap: 0.5rem;">
+            <div style="display: flex; align-items: center; gap: 0.5rem; font-size: 0.88rem; font-weight: 700; color: #ffffff;">
+              <span>🖼️</span>
+              <span>تمام والپیپرهای باکیفیت و گرادیانت‌های نوری (گالری یکپارچه)</span>
+            </div>
+            <span style="font-size: 0.75rem; color: #38bdf8; background: rgba(56, 189, 248, 0.15); border: 1px solid rgba(56, 189, 248, 0.3); padding: 0.2rem 0.65rem; border-radius: 9999px; font-weight: 600;">۲۲ والپیپر زنده</span>
+          </div>
+
+          <!-- Presets Grid for active category -->
+          <div id="wallpaper-preset-grid" class="preset-grid wallpaper-modal-grid"></div>
+
+          <!-- Upload Custom Wallpaper inside modal -->
+          <div class="wallpaper-modal-upload-box glass-panel" style="margin-top: 1.5rem; padding: 1rem 1.25rem; border-radius: 14px; display: flex; align-items: center; justify-content: space-between; gap: 1rem; flex-wrap: wrap;">
+            <div style="display: flex; align-items: center; gap: 0.75rem;">
+              <span style="font-size: 1.5rem;">📤</span>
+              <div>
+                <div style="font-weight: 700; font-size: 0.88rem; color: #ffffff;">بارگذاری تصویر دلخواه از سیستم</div>
+                <div style="font-size: 0.76rem; color: var(--text-secondary);">پشتیبانی از فرمت‌های تصویری و ذخیره در حافظه محلی</div>
+              </div>
+            </div>
+            <label class="btn-accent" style="cursor: pointer; margin: 0; padding: 0.5rem 1.1rem; border-radius: 10px; font-size: 0.82rem; display: inline-flex; align-items: center; gap: 0.4rem;">
+              <span>انتخاب فایل تصویر</span>
+              <input type="file" id="input-modal-custom-wallpaper" accept="image/*" style="display: none;" />
+            </label>
+          </div>
+        </div>
+        <div class="modal-footer" style="display: flex; justify-content: space-between; align-items: center;">
+          <span style="font-size: 0.78rem; color: var(--text-muted);">✨ تصاویر از طریق سرور سریع CDN و پروکسی هوشمند بارگذاری می‌شوند</span>
+          <button type="button" class="btn-breadcrumb-back" data-close-modal>بستن گالری</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Vanilla App Logic -->
+    <script type="module" src="./app.js"></script>
+  </body>
+</html>

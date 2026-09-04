@@ -1,0 +1,57 @@
+<svg viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="diamond-frame-grad-file" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#ffffff" stop-opacity="0.95" />
+      <stop offset="50%" stop-color="#e0e7ff" stop-opacity="0.88" />
+      <stop offset="100%" stop-color="#c7d2fe" stop-opacity="0.95" />
+    </linearGradient>
+    <linearGradient id="diamond-back-grad-file" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#ffffff" stop-opacity="0.5" />
+      <stop offset="100%" stop-color="#a5b4fc" stop-opacity="0.3" />
+    </linearGradient>
+  </defs>
+
+  <!-- Back 3D depth facets (fainter / translucent) -->
+  <g stroke="url(#diamond-back-grad-file)" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+    <line x1="34" y1="26" x2="57" y2="40" />
+    <line x1="66" y1="26" x2="43" y2="40" />
+    <line x1="43" y1="40" x2="50" y2="82" opacity="0.35" />
+    <line x1="57" y1="40" x2="50" y2="82" opacity="0.35" />
+  </g>
+
+  <!-- Outer diamond contour (exact silhouette from user image) -->
+  <polygon points="34,26 66,26 82,40 50,82 18,40"
+           stroke="url(#diamond-frame-grad-file)"
+           stroke-width="3"
+           stroke-linecap="round"
+           stroke-linejoin="round"
+           fill="rgba(255, 255, 255, 0.05)" />
+
+  <!-- Horizontal girdle line -->
+  <line x1="18" y1="40" x2="82" y2="40"
+        stroke="url(#diamond-frame-grad-file)"
+        stroke-width="2.8"
+        stroke-linecap="round" />
+
+  <!-- Front crown facets -->
+  <line x1="34" y1="26" x2="43" y2="40"
+        stroke="url(#diamond-frame-grad-file)"
+        stroke-width="2.8"
+        stroke-linecap="round" />
+  <line x1="66" y1="26" x2="57" y2="40"
+        stroke="url(#diamond-frame-grad-file)"
+        stroke-width="2.8"
+        stroke-linecap="round" />
+
+  <!-- Front pavilion facet folds (the signature lines meeting at culet) -->
+  <polyline points="43,40 37,54 50,82"
+            stroke="url(#diamond-frame-grad-file)"
+            stroke-width="2.8"
+            stroke-linecap="round"
+            stroke-linejoin="round" />
+  <polyline points="57,40 63,54 50,82"
+            stroke="url(#diamond-frame-grad-file)"
+            stroke-width="2.8"
+            stroke-linecap="round"
+            stroke-linejoin="round" />
+</svg>

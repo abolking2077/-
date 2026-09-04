@@ -1,0 +1,183 @@
+@import "tailwindcss";
+
+:root {
+  --card-radius: 24px;
+  --glass-blur: 20px;
+  --glass-saturate: 140%;
+  --glass-opacity: 0.12;
+  --glass-border-opacity: 0.14;
+  --bookmark-icon-size: 56px;
+  --bookmark-card-padding: 18px;
+}
+
+@layer base {
+  * {
+    box-sizing: border-box;
+  }
+  
+  html, body {
+    transition: background-color 400ms cubic-bezier(0.4, 0, 0.2, 1),
+                background-image 400ms cubic-bezier(0.4, 0, 0.2, 1),
+                color 400ms cubic-bezier(0.4, 0, 0.2, 1);
+  }
+}
+
+/* Custom Scrollbars */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(160, 160, 160, 0.25);
+  border-radius: 9999px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(160, 160, 160, 0.45);
+}
+
+/* Fluid drift animation for subtle neutral ambient mesh */
+@keyframes fluidDrift {
+  0% {
+    transform: translate(0px, 0px) scale(1);
+  }
+  33% {
+    transform: translate(25px, -40px) scale(1.06);
+  }
+  66% {
+    transform: translate(-20px, 20px) scale(0.96);
+  }
+  100% {
+    transform: translate(0px, 0px) scale(1);
+  }
+}
+
+.liquid-orb-1 {
+  animation: fluidDrift 20s ease-in-out infinite alternate;
+}
+
+.liquid-orb-2 {
+  animation: fluidDrift 28s ease-in-out infinite alternate-reverse;
+}
+
+.liquid-orb-3 {
+  animation: fluidDrift 24s ease-in-out infinite alternate;
+}
+
+/* Moving Light Sweep (Subtle Neutral Sheen) */
+@keyframes cardLightSweep {
+  0% {
+    transform: translateX(-150%) rotate(25deg);
+    opacity: 0;
+  }
+  50% {
+    opacity: 0.35;
+  }
+  100% {
+    transform: translateX(250%) rotate(25deg);
+  }
+}
+
+.group:hover .card-glow-sweep {
+  animation: cardLightSweep 1.2s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+}
+
+/* Refined AMOLED Liquid Glass Refraction (Dark Background Mode) */
+.liquid-glass-card {
+  border-radius: var(--card-radius);
+  background: linear-gradient(
+    135deg,
+    rgba(255, 255, 255, calc(var(--glass-opacity) * 0.75)) 0%,
+    rgba(255, 255, 255, calc(var(--glass-opacity) * 0.15)) 100%
+  );
+  backdrop-filter: blur(var(--glass-blur)) saturate(var(--glass-saturate));
+  -webkit-backdrop-filter: blur(var(--glass-blur)) saturate(var(--glass-saturate));
+  border: 1px solid rgba(255, 255, 255, calc(var(--glass-border-opacity) * 0.75));
+  box-shadow: 
+    0 12px 36px 0 rgba(0, 0, 0, 0.75),
+    inset 0 1px 0 0 rgba(255, 255, 255, 0.14);
+  transition: all 300ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.liquid-glass-card:hover {
+  background: linear-gradient(
+    135deg,
+    rgba(255, 255, 255, calc(var(--glass-opacity) * 1.3)) 0%,
+    rgba(255, 255, 255, calc(var(--glass-opacity) * 0.35)) 100%
+  );
+  border-color: rgba(255, 255, 255, 0.22);
+  box-shadow: 
+    0 18px 44px 0 rgba(0, 0, 0, 0.9),
+    inset 0 1px 0 0 rgba(255, 255, 255, 0.25);
+}
+
+/* Liquid Glass on Light / Bright Background (Ensures flawless contrast with dark text) */
+[data-text-tone="dark"] .liquid-glass-card {
+  background: linear-gradient(
+    135deg,
+    rgba(255, 255, 255, 0.7) 0%,
+    rgba(255, 255, 255, 0.45) 100%
+  );
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  box-shadow: 
+    0 8px 24px 0 rgba(0, 0, 0, 0.08),
+    inset 0 1px 0 0 rgba(255, 255, 255, 0.8);
+}
+
+[data-text-tone="dark"] .liquid-glass-card:hover {
+  background: linear-gradient(
+    135deg,
+    rgba(255, 255, 255, 0.85) 0%,
+    rgba(255, 255, 255, 0.6) 100%
+  );
+  border-color: rgba(0, 0, 0, 0.18);
+  box-shadow: 
+    0 14px 32px 0 rgba(0, 0, 0, 0.12),
+    inset 0 1px 0 0 rgba(255, 255, 255, 0.9);
+}
+
+.liquid-glass-panel {
+  background: rgba(3, 5, 10, 0.88);
+  backdrop-filter: blur(var(--glass-blur)) saturate(var(--glass-saturate));
+  -webkit-backdrop-filter: blur(var(--glass-blur)) saturate(var(--glass-saturate));
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  box-shadow: 
+    0 28px 64px rgba(0, 0, 0, 0.92),
+    inset 0 1px 0 rgba(255, 255, 255, 0.15);
+  transition: all 300ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* AMOLED Deep Dark Card (Pure deep obsidian with subtle starlight rim) */
+.dark-card {
+  border-radius: var(--card-radius);
+  background: #06080e;
+  border: 1px solid rgba(255, 255, 255, 0.07);
+  box-shadow: 0 8px 26px rgba(0, 0, 0, 0.8);
+  transition: all 300ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.dark-card:hover {
+  background: #0c111c;
+  border-color: rgba(99, 102, 241, 0.28);
+  box-shadow: 0 16px 36px rgba(0, 0, 0, 0.95), 0 0 20px rgba(56, 75, 120, 0.14);
+}
+
+.light-card {
+  border-radius: var(--card-radius);
+  background: #ffffff;
+  border: 1px solid #e2e8f0;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.04);
+  transition: all 300ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.light-card:hover {
+  background: #ffffff;
+  border-color: #cbd5e1;
+  box-shadow: 0 10px 24px rgba(0, 0, 0, 0.08);
+}
+
